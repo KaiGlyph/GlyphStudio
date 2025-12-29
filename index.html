@@ -1,73 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Studio Glyph - Espacio de aprendizaje y proyectos</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-</head>
-<body>
-
-  <header>
-    <h1>Studio Glyph</h1>
-    <nav>
-      <a href="#presentacion" tabindex="1">Inicio</a>
-      <a href="#maquetacion" tabindex="2">Maquetación</a>
-      <a href="#programacion" tabindex="3">Programación</a>
-      <a href="#robotica" tabindex="4">Robótica</a>
-      <a href="#contacto" tabindex="5">Contacto</a>
-    </nav>
-  </header>
-
-  <main>
-    <section id="presentacion" tabindex="0">
-      <h2>Bienvenido a Studio Glyph</h2>
-      <p>
-        En Studio Glyph comparto recursos y tutoriales para ayudarte a crecer en diferentes áreas de aprendizaje.
-        Mi misión es hacer que el conocimiento esté al alcance de todos, con explicaciones claras y proyectos prácticos.
-      </p>
-      <p>
-        Aquí encontrarás contenido sobre maquetación web, programación, robótica y más.
-        ¡Explora, aprende y crea con nosotros!
-      </p>
-    </section>
-
-    <div class="secciones-tarjetas">
-      <section id="maquetacion" class="tarjeta" tabindex="0" aria-label="Sección Maquetación">
-        <h2>Maquetación</h2>
-        <p>Aprende a diseñar sitios web responsive, accesibles y modernos usando HTML y CSS.</p>
-        <a href="#maquetacion" class="btn" tabindex="0">Ver más</a>
-      </section>
-
-      <section id="programacion" class="tarjeta" tabindex="0" aria-label="Sección Programación">
-        <h2>Programación</h2>
-        <p>Desde JavaScript hasta Python, descubre cómo crear programas y scripts eficientes y útiles.</p>
-        <a href="#programacion" class="btn" tabindex="0">Ver más</a>
-      </section>
-
-      <section id="robotica" class="tarjeta" tabindex="0" aria-label="Sección Robótica">
-        <h2>Robótica</h2>
-        <p>Explora proyectos con Arduino y microcontroladores, aprendiendo electrónica y automatización.</p>
-        <a href="#robotica" class="btn" tabindex="0">Ver más</a>
-      </section>
-    </div>
-
-    <section id="contacto" tabindex="0">
-      <h2>Contacto</h2>
-      <p>¿Tienes preguntas o quieres colaborar? Escríbeme y estaré encantado de ayudarte.</p>
-      <form action="mailto:info@studioglyph.com" method="post" enctype="text/plain" aria-label="Formulario de contacto">
-        <input type="text" name="nombre" placeholder="Tu nombre" required aria-required="true" />
-        <input type="email" name="email" placeholder="Tu correo electrónico" required aria-required="true" />
-        <textarea name="mensaje" placeholder="Tu mensaje" required aria-required="true"></textarea>
-        <button type="submit">Enviar</button>
-      </form>
-    </section>
-  </main>
-
-  <footer>
-    &copy; 2025 Studio Glyph. Todos los derechos reservados.
-  </footer>
-
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Studio Glyph</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
