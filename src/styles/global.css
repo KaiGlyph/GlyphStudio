@@ -1,6 +1,8 @@
+/* src/styles/global.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap');
 
 :root {
+  /* Modo oscuro (por defecto) */
   --bg-dark: #0d1117;
   --bg-darker: #090c10;
   --text-primary: #e6edf3;
@@ -8,9 +10,19 @@
   --accent-blue: #60a5fa;
   --accent-purple: #8b5cf6;
   --glow-blue: rgba(96, 165, 250, 0.3);
-  --glow-purple: rgba(139, 92, 246, 0.25);
   --border-radius: 8px;
   --transition: all 0.3s ease;
+}
+
+/* Modo claro */
+.light-mode {
+  --bg-dark: #ffffff;
+  --bg-darker: #f9fafb;
+  --text-primary: #111827;
+  --text-secondary: #1c1f24;
+  --accent-blue: #2563eb;
+  --accent-purple: #7c3aed;
+  --glow-blue: rgba(37, 99, 235, 0.2);
 }
 
 * {
@@ -22,19 +34,18 @@
 html {
   background-color: var(--bg-dark);
   scroll-behavior: smooth;
+  color-scheme: dark; /* mejora scrollbars en modo oscuro */
 }
 
 body {
-  background: transparent; /* o simplemente no declares background aquí */
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
 }
+
+/* ... resto de estilos sin cambios ... */
 
 h1, h2, h3, h4, h5 {
   font-family: 'Orbitron', monospace;
