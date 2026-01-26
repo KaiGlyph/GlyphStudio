@@ -77,7 +77,7 @@ export default function Footer() {
         <div style={{ height: '1px', width: '4rem', backgroundColor: 'rgba(255,255,255,0.08)' }} />
 
         <p style={{ margin: 0, textAlign: 'center' }}>
-          © {new Date().getFullYear()} Studio Glyph — Programación 2025
+          © {new Date().getFullYear()} Glyph Studio — Programación 2025
         </p>
 
         <div

@@ -1,8 +1,8 @@
 // src/components/layout/Header.tsx
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import logoBlanco from '../../assets/StudioGlyph-Logo.png';
-import logoNegro from '../../assets/StudioGlyph-LogoNegro.png';
+import logoBlanco from '../../assets/GlyphStudio-Logo.png';
+import logoNegro from '../../assets/GlyphStudio-LogoNegro.png';
 
 export default function Header() {
   const location = useLocation();
@@ -95,7 +95,7 @@ export default function Header() {
       >
         <img
           src={isDarkMode ? logoBlanco : logoNegro}
-          alt="Studio Glyph"
+          alt="Glyph Studio"
           style={{
             width: '2.75rem',
             height: '2.75rem',
@@ -109,7 +109,7 @@ export default function Header() {
             letterSpacing: '0.5px',
           }}
         >
-          STUDIO GLYPH
+          GLYPH STUDIO
         </h1>
       </Link>
 

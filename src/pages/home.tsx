@@ -88,7 +88,7 @@ export default function Home() {
               zIndex: 1,
             }}
           >
-            Studio Glyph es una plataforma de aprendizaje práctico para quienes quieren dominar disciplinas técnicas y creativas desde los fundamentos hasta proyectos reales. Sin atajos. Sin ruido. Solo conocimiento que construye.
+            Glyph Studio es una plataforma de aprendizaje práctico para quienes quieren dominar disciplinas técnicas y creativas desde los fundamentos hasta proyectos reales. Sin atajos. Sin ruido. Solo conocimiento que construye.
           </p>
         </section>
 
@@ -103,7 +103,7 @@ export default function Home() {
           }}
         />
 
-        {/* ¿Qué es Studio Glyph? */}
+        {/* ¿Qué es Glyph Studio? */}
         <section 
           ref={whatRef} 
           data-animated 
@@ -122,7 +122,7 @@ export default function Home() {
               letterSpacing: '-0.03em',
             }}
           >
-            ¿Qué es Studio Glyph?
+            ¿Qué es Glyph Studio?
           </h2>
           
           <p
@@ -133,7 +133,7 @@ export default function Home() {
               opacity: 0.95,
             }}
           >
-            Studio Glyph es un entorno digital dedicado al <strong style={{ color: 'var(--accent-blue)', fontWeight: 600 }}>aprendizaje profundo</strong> en disciplinas técnicas y creativas. 
+            Glyph Studio es un entorno digital dedicado al <strong style={{ color: 'var(--accent-blue)', fontWeight: 600 }}>aprendizaje profundo</strong> en disciplinas técnicas y creativas. 
             Comenzamos en <strong style={{ color: 'var(--accent-blue)', fontWeight: 700 }}>2025</strong> con Programación, y cada año incorporaremos nuevas dimensiones del conocimiento práctico.
           </p>
         </section>
