@@ -1,7 +1,8 @@
 // src/components/layout/Header.tsx
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import logo from '../../assets/StudioGlyph-Logo.png';
+import logoBlanco from '../../assets/StudioGlyph-Logo.png';
+import logoNegro from '../../assets/StudioGlyph-LogoNegro.png';
 
 export default function Header() {
   const location = useLocation();
@@ -92,25 +93,14 @@ export default function Header() {
         }}
         onClick={() => setIsMenuOpen(false)}
       >
-        <div style={{
-          width: '32px',
-          height: '32px',
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 0 20px var(--glow-blue)',
-        }}>
-          <img
-            src={logo}
-            alt="Studio Glyph"
-            style={{
-              width: '18px',
-              height: '18px',
-            }}
-          />
-        </div>
+        <img
+          src={isDarkMode ? logoBlanco : logoNegro}
+          alt="Studio Glyph"
+          style={{
+            width: '2.75rem',
+            height: '2.75rem',
+          }}
+        />
         <h1
           style={{
             fontSize: '1.3rem',
@@ -151,13 +141,44 @@ export default function Header() {
                         fontSize: '0.95rem',
                       }}
                       onMouseEnter={(e) => {
-                        if (!isActive) e.currentTarget.style.color = 'var(--accent-blue)';
+                        if (!isActive) {
+                          e.currentTarget.style.color = 'var(--accent-blue)';
+                          // Mostrar subrayado
+                          const underline = e.currentTarget.querySelector('.nav-underline') as HTMLElement;
+                          if (underline) {
+                            underline.style.width = '100%';
+                            underline.style.left = '0';
+                          }
+                        }
                       }}
                       onMouseLeave={(e) => {
-                        if (!isActive) e.currentTarget.style.color = 'var(--text-secondary)';
+                        if (!isActive) {
+                          e.currentTarget.style.color = 'var(--text-secondary)';
+                          // Ocultar subrayado
+                          const underline = e.currentTarget.querySelector('.nav-underline') as HTMLElement;
+                          if (underline) {
+                            underline.style.width = '0';
+                            underline.style.left = '50%';
+                          }
+                        }
                       }}
                     >
                       {label}
+                      {/* Subrayado animado */}
+                      {!isActive && (
+                        <span
+                          className="nav-underline"
+                          style={{
+                            position: 'absolute',
+                            bottom: '-4px',
+                            left: '50%',
+                            width: '0',
+                            height: '1px',
+                            backgroundColor: 'var(--accent-blue)',
+                            transition: 'width 0.3s ease, left 0.3s ease',
+                          }}
+                        />
+                      )}
                     </Link>
                   </li>
                 );
@@ -166,7 +187,7 @@ export default function Header() {
           </nav>
         )}
 
-        {/* Toggle de tema */}
+        {/* Toggle de tema con SVG */}
         <button
           onClick={toggleTheme}
           aria-label={`Cambiar a modo ${isDarkMode ? 'claro' : 'oscuro'}`}
@@ -182,7 +203,6 @@ export default function Header() {
             alignItems: 'center',
             justifyContent: 'center',
             transition: 'all 0.3s ease',
-            fontSize: '1.2rem',
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.borderColor = 'var(--accent-blue)';
@@ -193,7 +213,45 @@ export default function Header() {
             e.currentTarget.style.transform = 'rotate(0deg)';
           }}
         >
-          {isDarkMode ? '🌙' : '☀️'}
+          {isDarkMode ? (
+            // Ícono de sol (modo claro)
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+          ) : (
+            // Ícono de luna (modo oscuro)
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          )}
         </button>
 
         {/* Menú hamburguesa - solo en móvil */}

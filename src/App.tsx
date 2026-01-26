@@ -8,15 +8,18 @@ import './styles/global.css';
 export default function App() {
   return (
     <Router>
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <div style={{ maxWidth: '960px', margin: '0 auto', width: '100%' }}>
-          <Header />
-          <main style={{ flex: 1, padding: '2rem 0' }}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-            </Routes>
-          </main>
-        </div>
+      <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        minHeight: '100vh',
+        width: '100%',
+      }}>
+        <Header />
+        <main style={{ flex: 1 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </Router>
