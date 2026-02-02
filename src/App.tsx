@@ -15,7 +15,7 @@ export default function App() {
         <main style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/programacion-2025" element={<Programacion2025 />} />
+            <Route path="/pages/programacion-2025" element={<Programacion2025 />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

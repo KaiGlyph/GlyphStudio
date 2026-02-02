@@ -246,7 +246,7 @@ export default function Home() {
 
               {/* Botón de acceso al curso */}
               <a
-                href="/programacion2025"
+                href="/GlyphStudio/pages/programacion-2025"
                 style={{
                   display: 'inline-block',
                   backgroundColor: 'var(--accent-blue)',
