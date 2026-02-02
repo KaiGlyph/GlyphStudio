@@ -85,6 +85,7 @@ export default function NotFound() {
             backgroundColor: 'var(--accent-blue)',
             color: 'var(--bg-dark)',
             border: 'none',
+            marginTop: '2rem',
             padding: '1rem 2.5rem',
             borderRadius: '8px',
             fontWeight: 700,

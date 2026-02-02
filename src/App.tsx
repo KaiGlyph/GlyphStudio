@@ -9,13 +9,13 @@ import './styles/global.css';
 
 export default function App() {
   return (
-    <BrowserRouter basename="/GlyphStudio">
+    <BrowserRouter>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
         <Header />
         <main style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/pages/programacion-2025" element={<Programacion2025 />} />
+            <Route path="/programacion-2025" element={<Programacion2025 />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
