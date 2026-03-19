@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import './codigoSection.css';
+import './CodigoSection.css';
 
 export default function CodigoSection() {
   const navigate = useNavigate();

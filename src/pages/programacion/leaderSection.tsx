@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import './leaderSection.css';
+import './LeaderSection.css';
 
 export default function LeaderSection() {
   const navigate = useNavigate();
