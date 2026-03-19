@@ -13,10 +13,10 @@ import CodigoSection    from './pages/programacion/codigoSection';
 import LeaderSection    from './pages/programacion/leaderSection';
 
 // Programación — Código: lenguajes
-import PythonPage      from './pages/programacion/codigos/PythonPage';
-import JavaScriptPage  from './pages/programacion/codigos/JavaScriptPage';
-import TypeScriptPage  from './pages/programacion/codigos/TypeScriptPage';
-import ReactPage       from './pages/programacion/codigos/ReactPage';
+import PythonPage      from './pages/programacion/codigo/PythonPage';
+import JavaScriptPage  from './pages/programacion/codigo/JavaScriptPage';
+import TypeScriptPage  from './pages/programacion/codigo/TypeScriptPage';
+import ReactPage       from './pages/programacion/codigo/ReactPage';
 
 // Ladder — próximamente (descomenta al crear cada archivo)
 // import LadderLogicPage from './pages/programacion/ladder/LadderLogicPage';
