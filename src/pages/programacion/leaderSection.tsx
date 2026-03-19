@@ -136,27 +136,6 @@ export default function LeaderSection() {
 
         <div className="leader-section-divider" />
 
-        {/* Fundamentos */}
-        <section className="leader-section-content">
-          <h2 className="section-title">Fundamentos de Automatización</h2>
-
-          <div className="fundamentos-list">
-            {fundamentos.map((item, index) => (
-              <div key={index} className="fundamento-item" style={{ animationDelay: `${index * 0.12}s` }}>
-                <div className="fundamento-left">
-                  <span className="fundamento-numero">{item.numero}</span>
-                  {index < fundamentos.length - 1 && <div className="fundamento-linea" />}
-                </div>
-                <div className="fundamento-body">
-                  <h3 className="fundamento-title">{item.titulo}</h3>
-                  <p className="fundamento-text">{item.contenido}</p>
-                  <pre className="fundamento-snippet"><code>{item.snippet}</code></pre>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* Tecnologías */}
         <section className="leader-section-content">
           <h2 className="section-title">Tecnologías y Herramientas</h2>
@@ -193,6 +172,27 @@ export default function LeaderSection() {
                     <polyline points="12 5 19 12 12 19" />
                   </svg>
                 </button>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Fundamentos */}
+        <section className="leader-section-content">
+          <h2 className="section-title">Fundamentos de Automatización</h2>
+
+          <div className="fundamentos-list">
+            {fundamentos.map((item, index) => (
+              <div key={index} className="fundamento-item" style={{ animationDelay: `${index * 0.12}s` }}>
+                <div className="fundamento-left">
+                  <span className="fundamento-numero">{item.numero}</span>
+                  {index < fundamentos.length - 1 && <div className="fundamento-linea" />}
+                </div>
+                <div className="fundamento-body">
+                  <h3 className="fundamento-title">{item.titulo}</h3>
+                  <p className="fundamento-text">{item.contenido}</p>
+                  <pre className="fundamento-snippet"><code>{item.snippet}</code></pre>
+                </div>
               </div>
             ))}
           </div>

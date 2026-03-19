@@ -18,9 +18,11 @@ import JavaScriptPage  from './pages/programacion/codigo/JavaScriptPage';
 import TypeScriptPage  from './pages/programacion/codigo/TypeScriptPage';
 import ReactPage       from './pages/programacion/codigo/ReactPage';
 
+// Ladder — activas
+import LadderLogicPage from './pages/programacion/ladder/LadderLogicPage';
+import TiaPortalPage   from './pages/programacion/ladder/TiaPortalPage';
+
 // Ladder — próximamente (descomenta al crear cada archivo)
-// import LadderLogicPage from './pages/programacion/ladder/LadderLogicPage';
-// import TiaPortalPage   from './pages/programacion/ladder/TiaPortalPage';
 // import PlcsPage        from './pages/programacion/ladder/PlcsPage';
 
 import './styles/global.css';
@@ -71,8 +73,8 @@ export default function App() {
             <Route path="/programacion/codigo/react"       element={<ReactPage />} />
 
             {/* ── Tecnologías Ladder ──────────────────── */}
-            <Route path="/programacion/ladder/ladder-logic" element={<Proximamente />} />
-            <Route path="/programacion/ladder/tia-portal"   element={<Proximamente />} />
+            <Route path="/programacion/ladder/ladder-logic" element={<LadderLogicPage />} />
+            <Route path="/programacion/ladder/tia-portal"   element={<TiaPortalPage />} />
             <Route path="/programacion/ladder/plcs"         element={<Proximamente />} />
 
             {/* ── 404 — siempre al final ──────────────── */}

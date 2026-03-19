@@ -1,0 +1,288 @@
+/* ========================================
+   HEADER — ESTILOS
+   ======================================== */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 50;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: var(--bg-darker);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.light-mode .header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ── Logo ── */
+
+.header-logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.header-logo-img {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+.header-logo-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* ── Acciones derechas ── */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* ── Nav escritorio ── */
+
+.header-nav ul {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.nav-link:hover {
+  color: var(--accent-blue);
+}
+
+.nav-link.active {
+  color: var(--accent-blue);
+}
+
+/* Subrayado animado */
+.nav-underline {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background-color: var(--accent-blue);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover .nav-underline {
+  width: 100%;
+  left: 0;
+}
+
+/* ── Botón tema ── */
+
+.btn-theme {
+  background: transparent;
+  border: 2px solid var(--text-secondary);
+  color: var(--text-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.btn-theme:hover {
+  border-color: var(--accent-blue);
+  transform: rotate(180deg);
+}
+
+/* ── Botón hamburguesa ── */
+
+.btn-hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  position: relative;
+  width: 28px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  position: absolute;
+  left: 50%;
+  transform-origin: center;
+}
+
+.hamburger-line-1 {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hamburger-line-1.open {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.hamburger-line-2 {
+  top: 50%;
+  transform: translate(-50%, calc(-50% - 6px));
+}
+
+.hamburger-line-2.open {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.hamburger-line-3 {
+  top: 50%;
+  transform: translate(-50%, calc(-50% + 6px));
+  opacity: 1;
+}
+
+.hamburger-line-3.open {
+  opacity: 0;
+}
+
+/* ========================================
+   MENÚ MÓVIL
+   El z-index debe ser MAYOR que el header (50)
+   para que no quede cortado por él
+   ======================================== */
+
+.mobile-menu {
+  position: fixed;
+  /* Empieza justo debajo del header, no desde top:0 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 51;           /* ← por encima del header */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 2rem;
+  background-color: rgba(9, 12, 16, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  animation: menuSlideDown 0.25s ease-out both;
+}
+
+.light-mode .mobile-menu {
+  background-color: rgba(249, 250, 251, 0.98);
+}
+
+.mobile-menu-link {
+  color: var(--text-primary);
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.05em;
+  position: relative;
+}
+
+.mobile-menu-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent-blue);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.mobile-menu-link:hover,
+.mobile-menu-link.active {
+  color: var(--accent-blue);
+}
+
+.mobile-menu-link:hover::after,
+.mobile-menu-link.active::after {
+  width: 100%;
+}
+
+/* Botón cerrar en el menú móvil */
+.mobile-menu-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-secondary);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  font-size: 1.2rem;
+}
+
+.mobile-menu-close:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-blue);
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+
+@keyframes menuSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 1.25rem;
+  }
+
+  .header-actions {
+    gap: 1rem;
+  }
+}
