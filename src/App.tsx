@@ -5,7 +5,12 @@ import Footer from './components/layout/footer';
 
 // Páginas generales
 import Home     from './pages/home';
-import NotFound from './pages/NotFound';
+import NotFound      from './pages/NotFound';
+import Cursos        from './pages/Cursos';
+import SobreNosotros from './pages/Sobrenosotros';
+import Contacto      from './pages/Contacto';
+import Terminos      from './pages/Terminos';
+import Privacidad    from './pages/Privacidad';
 
 // Programación — vistas de sección
 import Programacion2025 from './pages/programacion/programacion2025';
@@ -23,9 +28,10 @@ import LadderLogicPage from './pages/programacion/ladder/LadderLogicPage';
 import TiaPortalPage   from './pages/programacion/ladder/TiaPortalPage';
 
 // Ladder — próximamente (descomenta al crear cada archivo)
-// import PlcsPage        from './pages/programacion/ladder/PlcsPage';
+import PlcsPage from './pages/programacion/ladder/Plcspage';
 
 import './styles/global.css';
+import './styles/course-shared.css';
 
 // Placeholder temporal para páginas aún no creadas
 function Proximamente() {
@@ -58,6 +64,11 @@ export default function App() {
 
             {/* ── Ruta principal ───────────────────────── */}
             <Route path="/" element={<Home />} />
+            <Route path="/cursos"          element={<Cursos />} />
+            <Route path="/sobre-nosotros" element={<SobreNosotros />} />
+            <Route path="/contacto"       element={<Contacto />} />
+            <Route path="/terminos"       element={<Terminos />} />
+            <Route path="/privacidad"     element={<Privacidad />} />
 
             {/* ── Programación 2025 — vista general ───── */}
             <Route path="/programacion-2025" element={<Programacion2025 />} />
@@ -75,7 +86,7 @@ export default function App() {
             {/* ── Tecnologías Ladder ──────────────────── */}
             <Route path="/programacion/ladder/ladder-logic" element={<LadderLogicPage />} />
             <Route path="/programacion/ladder/tia-portal"   element={<TiaPortalPage />} />
-            <Route path="/programacion/ladder/plcs"         element={<Proximamente />} />
+            <Route path="/programacion/ladder/plcs"         element={<PlcsPage />} />
 
             {/* ── 404 — siempre al final ──────────────── */}
             <Route path="*" element={<NotFound />} />

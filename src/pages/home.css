@@ -1,0 +1,380 @@
+/* ========================================
+   HOME — ESTILOS
+   ======================================== */
+
+.home-page {
+  padding-top: 6.5rem;
+  padding-bottom: 5rem;
+  min-height: calc(100vh - 140px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 40%, var(--bg-dark) 100%);
+}
+
+.home-container {
+  max-width: 1100px;
+  width: 100%;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+}
+
+/* ========================================
+   HERO
+   ======================================== */
+
+.hero-section {
+  margin-bottom: 10rem;
+  text-align: center;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, var(--glow-blue) 0%, transparent 70%);
+  opacity: 0.12;
+  pointer-events: none;
+  filter: blur(100px);
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.12; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 0.18; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 3rem;
+  letter-spacing: -0.04em;
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.9s ease-out both;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: var(--text-secondary);
+  max-width: 850px;
+  margin: 0 auto;
+  line-height: 1.8;
+  font-weight: 400;
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.9s ease-out 0.15s both;
+}
+
+/* ========================================
+   SEPARADOR
+   ======================================== */
+
+.home-divider {
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+  margin: 0 auto 4rem;
+  opacity: 0.2;
+}
+
+/* ========================================
+   SECCIONES DE CONTENIDO
+   ======================================== */
+
+.home-section {
+  margin-bottom: 10rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.home-section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--accent-blue);
+  margin-bottom: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.home-section-text {
+  color: var(--text-primary);
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  line-height: 1.9;
+  opacity: 0.95;
+}
+
+.home-section-text strong {
+  color: var(--accent-blue);
+  font-weight: 600;
+}
+
+/* ========================================
+   TARJETA DE CURSO
+   ======================================== */
+
+.home-page .curso-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.75rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-page .curso-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96, 165, 250, 0.25);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.home-page .curso-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-blue), #818cf8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(96, 165, 250, 0.3);
+  margin-top: 0.2rem;
+}
+
+.home-page .curso-card-icon span {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--bg-dark);
+}
+
+.home-page .curso-card-body { flex: 1; min-width: 0; }
+
+.home-page .curso-card-title {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.6rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.home-page .curso-card-desc {
+  color: var(--text-secondary);
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+.home-page .curso-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--accent-blue);
+  color: var(--bg-dark);
+  text-decoration: none;
+  padding: 0.75rem 1.75rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(96, 165, 250, 0.3);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.home-page .curso-card-btn:hover {
+  background-color: #93c5fd;
+  color: var(--bg-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(96, 165, 250, 0.4);
+}
+
+/* ========================================
+   FILOSOFÍA — GRID DE TARJETAS
+   ======================================== */
+
+.filosofia-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--accent-blue);
+  margin-bottom: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.filosofia-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.filosofia-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 2rem 1.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-align: center;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filosofia-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(96, 165, 250, 0.2);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+.filosofia-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  box-shadow: 0 4px 16px rgba(96, 165, 250, 0.25);
+  color: var(--bg-dark);
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.filosofia-card-title {
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  color: var(--accent-blue);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.filosofia-card-desc {
+  color: var(--text-secondary);
+  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+  line-height: 1.7;
+}
+
+/* ========================================
+   CTA
+   ======================================== */
+
+.cta-section {
+  text-align: center;
+  margin-top: 10rem;
+  padding: 5rem 2rem;
+  position: relative;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: fadeInUp 0.8s ease-out both;
+}
+
+.cta-divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+  margin: 0 auto 3rem;
+  opacity: 0.6;
+}
+
+.cta-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.cta-desc {
+  color: var(--text-secondary);
+  font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+  margin: 0 auto 3rem;
+  max-width: 750px;
+  line-height: 1.8;
+}
+
+.cta-btn {
+  background-color: var(--accent-blue);
+  color: var(--bg-dark);
+  border: none;
+  padding: 1.2rem 3.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 40px rgba(96, 165, 250, 0.3);
+  letter-spacing: 0.01em;
+  font-family: inherit;
+}
+
+.cta-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 60px rgba(96, 165, 250, 0.5);
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .hero-section { margin-bottom: 5rem; min-height: 50vh; }
+  .home-section  { margin-bottom: 5rem; }
+  .cta-section   { margin-top: 5rem; padding: 3rem 1rem; }
+
+  .home-page .curso-card {
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .home-page .curso-card-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .filosofia-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-container {
+    padding: 0 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title { letter-spacing: -0.02em; }
+  .cta-btn { width: 100%; padding: 1rem 2rem; }
+}

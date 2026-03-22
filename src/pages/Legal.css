@@ -1,0 +1,145 @@
+/* ========================================
+   LEGAL — ESTILOS COMPARTIDOS
+   (Términos de uso + Política de privacidad)
+   ======================================== */
+
+.legal-page {
+  padding-top: 6.5rem;
+  padding-bottom: 5rem;
+  min-height: calc(100vh - 140px);
+  background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+}
+
+.legal-container {
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 5vw, 2.5rem);
+}
+
+/* ── Hero ── */
+
+.legal-hero {
+  padding: 3rem 0 3.5rem;
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+.legal-badge {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-family: 'Orbitron', monospace;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
+}
+
+.legal-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  line-height: 1.15;
+}
+
+.legal-meta {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  margin: 0;
+}
+
+/* ── Contenido ── */
+
+.legal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  animation: fadeInUp 0.7s ease-out 0.1s both;
+}
+
+.legal-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 2rem;
+}
+
+.legal-section h2 {
+  font-family: 'Orbitron', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+}
+
+.legal-section p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: 0.875rem;
+}
+
+.legal-section p:last-child { margin-bottom: 0; }
+
+.legal-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.legal-section ul li {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.legal-section ul li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--accent-blue);
+  opacity: 0.7;
+}
+
+.legal-section a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(96, 165, 250, 0.3);
+  transition: border-color 0.2s ease;
+}
+
+.legal-section a:hover {
+  border-color: var(--accent-blue);
+}
+
+.legal-section strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ── Animaciones ── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 480px) {
+  .legal-section h2 { font-size: 0.875rem; }
+  .legal-section p,
+  .legal-section ul li { font-size: 0.95rem; }
+}

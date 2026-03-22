@@ -1,0 +1,290 @@
+/* ========================================
+   ESTILOS COMPARTIDOS — PÁGINAS DE CURSO
+   Responsive fixes aplicados a todos los cursos
+   ======================================== */
+
+/* ─── Fix global: nada puede desbordar ─── */
+* {
+  min-width: 0;
+}
+
+/* ─── Layouts de curso ─── */
+
+.python-layout,
+.js-layout,
+.ts-layout,
+.react-layout,
+.ladder-layout,
+.tia-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 4.5rem);
+  padding: 0 1.5rem 4rem;
+  gap: 3rem;
+  align-items: start;
+  /* Evita que el grid desborde */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─── Contenido principal ─── */
+
+.python-content,
+.js-content,
+.ts-content,
+.react-content,
+.ladder-content,
+.tia-content {
+  /* Limita el ancho al espacio disponible */
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* ─── Bloques de código: el fix más importante ─── */
+
+.codigo-block,
+.js-block,
+.ts-codigo-block,
+.react-codigo-block,
+.ladder-codigo-block,
+.tia-codigo-block,
+.ejercicio-card,
+.js-ejercicio,
+.ts-ejercicio,
+.react-ejercicio,
+.ladder-ejercicio,
+.tia-ejercicio {
+  /* Nunca más ancho que el contenedor */
+  max-width: 100% !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ─── Pre/code: scroll horizontal interno, no desborda ─── */
+
+.codigo-pre,
+.ts-pre,
+.react-pre,
+.ladder-pre,
+.tia-pre,
+.fundamento-snippet,
+.solucion-pre,
+.js-solucion-pre,
+.ts-solucion-pre,
+.react-solucion-pre,
+.ladder-solucion-pre,
+.tia-solucion-pre {
+  white-space: pre;
+  overflow-x: auto;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  /* Scroll suave en móvil */
+  -webkit-overflow-scrolling: touch;
+  /* Evita que el texto rompa el layout */
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+/* ─── Teoría ─── */
+
+.teoria-body,
+.fundamento-text,
+.modulo-desc,
+.ejercicio-enunciado {
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ─── Sidebar ─── */
+
+.python-sidebar,
+.js-sidebar,
+.ts-sidebar,
+.react-sidebar,
+.ladder-sidebar,
+.tia-sidebar {
+  min-width: 0;
+}
+
+/* ========================================
+   RESPONSIVE — tablet y móvil
+   ======================================== */
+
+@media (max-width: 900px) {
+
+  /* Todos los layouts pasan a una columna */
+  .python-layout,
+  .js-layout,
+  .ts-layout,
+  .react-layout,
+  .ladder-layout,
+  .tia-layout {
+    grid-template-columns: 1fr;
+    padding: 0 1rem 3rem;
+    gap: 1.5rem;
+  }
+
+  /* Sidebars dejan de ser sticky */
+  .python-sidebar,
+  .js-sidebar,
+  .ts-sidebar,
+  .react-sidebar,
+  .ladder-sidebar,
+  .tia-sidebar {
+    position: static;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 1.5rem;
+  }
+
+  /* Módulos en grid horizontal */
+  .modulos-nav {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .modulo-duracion { display: none; }
+
+  .python-content,
+  .js-content,
+  .ts-content,
+  .react-content,
+  .ladder-content,
+  .tia-content {
+    padding-top: 1rem;
+  }
+
+  /* Reducir padding interno de snippets */
+  .codigo-pre,
+  .ts-pre,
+  .react-pre,
+  .ladder-pre,
+  .tia-pre,
+  .fundamento-snippet {
+    font-size: 0.8rem;
+    padding: 1rem 1.25rem;
+    line-height: 1.7;
+  }
+
+  /* Reducir padding de ejercicios */
+  .ejercicio-enunciado { padding: 1.25rem 1.25rem 0; }
+  .pista-box,
+  .js-pista,
+  .ts-pista,
+  .react-pista,
+  .ladder-pista,
+  .tia-pista { margin: 0.75rem 1.25rem; }
+  .btn-solucion { margin: 0 1.25rem 1.25rem; }
+  .solucion-block { margin: 0 1.25rem 1.25rem; }
+
+}
+
+@media (max-width: 600px) {
+
+  /* Layouts con padding mínimo */
+  .python-layout,
+  .js-layout,
+  .ts-layout,
+  .react-layout,
+  .ladder-layout,
+  .tia-layout {
+    padding: 0 0.75rem 2rem;
+  }
+
+  /* Módulos en columna única */
+  .modulos-nav {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Navegación inferior en columna */
+  .modulo-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .btn-nav {
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Títulos más pequeños */
+  .modulo-titulo,
+  .js-titulo,
+  .ts-titulo,
+  .react-titulo,
+  .ladder-titulo,
+  .tia-titulo {
+    font-size: clamp(1.4rem, 6vw, 2rem) !important;
+  }
+
+  /* Snippets con fuente mínima legible */
+  .codigo-pre,
+  .ts-pre,
+  .react-pre,
+  .ladder-pre,
+  .tia-pre,
+  .fundamento-snippet {
+    font-size: 0.75rem;
+    padding: 0.875rem 1rem;
+  }
+
+  /* Cabecera del bloque de código */
+  .codigo-header {
+    padding: 0.6rem 1rem;
+  }
+
+  .codigo-titulo {
+    font-size: 0.75rem;
+    /* Truncar si es muy largo */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* Progreso wrapper */
+  .progreso-wrapper {
+    padding: 0.875rem 1rem;
+  }
+
+  /* Módulo badge y tiempo */
+  .modulo-meta {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+/* ========================================
+   FIX ESPECÍFICO: fundamentos timeline
+   en CodigoSection y LeaderSection
+   ======================================== */
+
+@media (max-width: 600px) {
+  .fundamento-item {
+    gap: 0.875rem;
+  }
+
+  .fundamento-left {
+    width: 32px;
+    flex-shrink: 0;
+  }
+
+  .fundamento-numero {
+    width: 32px;
+    height: 32px;
+    font-size: 0.6rem;
+  }
+
+  .fundamento-body {
+    padding-bottom: 2rem;
+    min-width: 0;
+  }
+
+  .fundamento-snippet {
+    font-size: 0.72rem;
+    padding: 0.875rem;
+  }
+}

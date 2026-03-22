@@ -1,0 +1,405 @@
+/* ========================================
+   CURSOS — ESTILOS
+   ======================================== */
+
+.cursos-page {
+  padding-top: 6.5rem;
+  padding-bottom: 5rem;
+  min-height: calc(100vh - 140px);
+  background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+}
+
+.cursos-container {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 2.5rem);
+}
+
+/* ========================================
+   HERO
+   ======================================== */
+
+.cursos-hero {
+  text-align: center;
+  padding: 3rem 0 4rem;
+  position: relative;
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+.cursos-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 300px;
+  background: radial-gradient(ellipse, var(--glow-blue) 0%, transparent 70%);
+  opacity: 0.1;
+  pointer-events: none;
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.cursos-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cursos-subtitle {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: var(--text-secondary);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.75;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   LISTA DE CATEGORÍAS
+   ======================================== */
+
+.categorias-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: fadeInUp 0.7s ease-out 0.15s both;
+}
+
+/* ─── Cada categoría ─── */
+
+.categoria-item {
+  background: var(--bg-darker);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  /* SIN overflow:hidden — lo teníamos aquí y cortaba el acordeón */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.categoria-item.abierta {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.categoria-item:not(.bloqueada):hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.categoria-item.bloqueada {
+  opacity: 0.6;
+}
+
+/* ─── Cabecera clickable ─── */
+
+.categoria-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem;
+  background: transparent;
+  border: none;
+  border-radius: 16px; /* igual que el wrapper para que el hover no salga */
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+
+/* Cuando está abierto, solo redondear arriba */
+.categoria-item.abierta .categoria-header {
+  border-radius: 16px 16px 0 0;
+}
+
+.categoria-header:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.categoria-header:disabled {
+  cursor: default;
+}
+
+.categoria-header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.categoria-icono {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--acento) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--acento) 30%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  color: var(--acento);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.categoria-item.abierta .categoria-icono {
+  transform: scale(1.05);
+}
+
+.categoria-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.categoria-nombre-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+
+.categoria-nombre {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.badge-proximamente {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-family: 'Orbitron', monospace;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+}
+
+.categoria-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Flecha */
+.categoria-chevron {
+  color: var(--text-secondary);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s;
+  flex-shrink: 0;
+}
+
+.categoria-chevron.rotado {
+  transform: rotate(180deg);
+  color: var(--acento);
+}
+
+/* ========================================
+   CUERPO EXPANDIBLE
+   Usamos grid-template-rows para la animación:
+   es la técnica moderna que no necesita max-height fijo.
+   ======================================== */
+
+.categoria-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.categoria-body.expandido {
+  grid-template-rows: 1fr;
+}
+
+/* Este inner SÍ tiene overflow:hidden — hace el clip de la animación
+   sin afectar al borde redondeado del wrapper */
+.categoria-body-inner {
+  overflow: hidden;
+}
+
+/* Separador visual entre header y body */
+.categoria-item.abierta .categoria-body-inner {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================
+   SUBCATEGORÍAS
+   ======================================== */
+
+.subcategoria {
+  padding: 1.75rem 2rem 2rem;
+}
+
+.subcategoria + .subcategoria {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.subcategoria-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.subcategoria-linea {
+  width: 3px;
+  min-height: 40px;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--acento) 50%, transparent);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.subcategoria-nombre {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--acento);
+  margin: 0 0 0.35rem;
+  letter-spacing: 0.03em;
+}
+
+.subcategoria-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ========================================
+   GRID DE CURSOS
+   ======================================== */
+
+.cursos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* ─── Tarjeta de curso ─── */
+
+.curso-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.curso-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--acento) 25%, transparent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.curso-card-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.curso-card:hover .curso-card-logo {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.curso-card-body { flex: 1; }
+
+.curso-card-nombre {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.35rem;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.01em;
+}
+
+.curso-card-desc {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.curso-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border-radius: 7px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--acento);
+  background: color-mix(in srgb, var(--acento) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--acento) 25%, transparent);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: fit-content;
+  font-family: inherit;
+}
+
+.curso-card-btn:hover {
+  background: color-mix(in srgb, var(--acento) 18%, transparent);
+  border-color: var(--acento);
+  gap: 0.6rem;
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 640px) {
+  .categoria-header {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .categoria-icono {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+
+  .subcategoria {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+
+  .cursos-grid {
+    grid-template-columns: 1fr;
+  }
+}

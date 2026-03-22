@@ -189,8 +189,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem;
+  gap: 2rem;
   padding: 2rem;
+  text-align: center;
   background-color: rgba(9, 12, 16, 0.98);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -203,13 +204,16 @@
 
 .mobile-menu-link {
   color: var(--text-primary);
-  font-size: 1.75rem;
+  font-size: clamp(1.25rem, 6vw, 1.75rem);
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease;
   font-family: 'Orbitron', monospace;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.03em;
   position: relative;
+  text-align: center;
+  width: 100%;
+  max-width: 280px;
 }
 
 .mobile-menu-link::after {

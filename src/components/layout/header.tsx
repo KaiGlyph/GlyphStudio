@@ -17,8 +17,8 @@ export default function Header() {
 
   const navLinks = [
     { to: '/',              label: 'Inicio' },
-    { to: '/cursos',        label: 'Cursos' },
     { to: '/sobre-nosotros',label: 'Sobre nosotros' },
+    { to: '/cursos',        label: 'Cursos' },
     { to: '/contacto',      label: 'Contacto' },
   ];
 
