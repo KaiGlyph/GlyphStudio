@@ -1,14 +1,18 @@
 // src/components/layout/Header.tsx
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import logoBlanco from '../../assets/GlyphStudio-Logo.png';
-import logoNegro from '../../assets/GlyphStudio-LogoNegro.png';
+import logoNegro  from '../../assets/GlyphStudio-LogoNegro.png';
+import { useAuth } from '../../context/AuthContext';
 import './Header.css';
 
 export default function Header() {
-  const location = useLocation();
+  const location  = useLocation();
+  const navigate  = useNavigate();
+  const { user, cerrarSesion } = useAuth();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile,   setIsMobile]   = useState(window.innerWidth < 768);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme');
     return saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -16,13 +20,12 @@ export default function Header() {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const navLinks = [
-    { to: '/',              label: 'Inicio' },
-    { to: '/sobre-nosotros',label: 'Sobre nosotros' },
-    { to: '/cursos',        label: 'Cursos' },
-    { to: '/contacto',      label: 'Contacto' },
+    { to: '/',               label: 'Inicio' },
+    { to: '/cursos',         label: 'Cursos' },
+    { to: '/sobre-nosotros', label: 'Sobre nosotros' },
+    { to: '/contacto',       label: 'Contacto' },
   ];
 
-  // Aplicar tema al cargar
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
@@ -35,7 +38,6 @@ export default function Header() {
     }
   }, [isDarkMode]);
 
-  // Detectar cambio de tamaño
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -45,7 +47,6 @@ export default function Header() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Cerrar menú al hacer clic fuera
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -56,12 +57,8 @@ export default function Header() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isMenuOpen]);
 
-  // Cerrar menú al cambiar de ruta
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location.pathname]);
+  useEffect(() => { setIsMenuOpen(false); }, [location.pathname]);
 
-  // Bloquear scroll del body cuando el menú está abierto
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
@@ -70,7 +67,8 @@ export default function Header() {
   return (
     <>
       <header className="header">
-        {/* Logo */}
+
+        {/* Logo — imagen + texto, sin cuadrado */}
         <Link to="/" className="header-logo" onClick={() => setIsMenuOpen(false)}>
           <img
             src={isDarkMode ? logoBlanco : logoNegro}
@@ -91,10 +89,7 @@ export default function Header() {
                   const isActive = location.pathname === to;
                   return (
                     <li key={to}>
-                      <Link
-                        to={to}
-                        className={`nav-link ${isActive ? 'active' : ''}`}
-                      >
+                      <Link to={to} className={`nav-link ${isActive ? 'active' : ''}`}>
                         {label}
                         {!isActive && <span className="nav-underline" />}
                       </Link>
@@ -105,28 +100,41 @@ export default function Header() {
             </nav>
           )}
 
-          {/* Toggle de tema */}
+          {/* Usuario / Login — solo escritorio */}
+          {!isMobile && (
+            user ? (
+              <div className="header-user">
+                <div className="header-avatar">
+                  {(user.user_metadata?.username?.[0] ?? user.email?.[0] ?? 'U').toUpperCase()}
+                </div>
+                <span className="header-username">
+                  {user.user_metadata?.username ?? user.email?.split('@')[0]}
+                </span>
+                <button className="btn-logout" onClick={cerrarSesion}>Salir</button>
+              </div>
+            ) : (
+              <button className="btn-login-header" onClick={() => navigate('/login')}>
+                Iniciar sesión
+              </button>
+            )
+          )}
+
+          {/* Toggle tema */}
           <button
             className="btn-theme"
             onClick={() => setIsDarkMode(!isDarkMode)}
             aria-label={`Cambiar a modo ${isDarkMode ? 'claro' : 'oscuro'}`}
           >
             {isDarkMode ? (
-              // Sol
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
               </svg>
             ) : (
-              // Luna
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                 fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
@@ -139,7 +147,7 @@ export default function Header() {
             <button
               className="btn-hamburger"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Abrir menú de navegación"
+              aria-label="Abrir menú"
               aria-expanded={isMenuOpen}
             >
               <span className={`hamburger-line hamburger-line-1 ${isMenuOpen ? 'open' : ''}`} />
@@ -150,31 +158,30 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Menú móvil — fuera del header para evitar que sea cortado */}
+      {/* Menú móvil */}
       {isMenuOpen && isMobile && (
         <div ref={menuRef} className="mobile-menu">
-
-          {/* Botón cerrar */}
-          <button
-            className="mobile-menu-close"
-            onClick={() => setIsMenuOpen(false)}
-            aria-label="Cerrar menú"
-          >
-            ✕
-          </button>
+          <button className="mobile-menu-close" onClick={() => setIsMenuOpen(false)} aria-label="Cerrar menú">✕</button>
 
           {navLinks.map(({ to, label }) => {
             const isActive = location.pathname === to;
             return (
-              <Link
-                key={to}
-                to={to}
-                className={`mobile-menu-link ${isActive ? 'active' : ''}`}
-              >
+              <Link key={to} to={to} className={`mobile-menu-link ${isActive ? 'active' : ''}`}>
                 {label}
               </Link>
             );
           })}
+
+          {/* Login/usuario en móvil */}
+          {user ? (
+            <button className="mobile-menu-link mobile-logout" onClick={() => { cerrarSesion(); setIsMenuOpen(false); }}>
+              Cerrar sesión
+            </button>
+          ) : (
+            <Link to="/login" className="mobile-menu-link mobile-login">
+              Iniciar sesión
+            </Link>
+          )}
         </div>
       )}
     </>

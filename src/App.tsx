@@ -1,5 +1,7 @@
 // src/App.tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import Login          from './pages/Login';
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
 
@@ -55,6 +57,7 @@ function Proximamente() {
 
 export default function App() {
   return (
+    <AuthProvider>
     <BrowserRouter>
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
         <Header />
@@ -88,6 +91,8 @@ export default function App() {
             <Route path="/programacion/ladder/tia-portal"   element={<TiaPortalPage />} />
             <Route path="/programacion/ladder/plcs"         element={<PlcsPage />} />
 
+            <Route path="/login" element={<Login />} />
+
             {/* ── 404 — siempre al final ──────────────── */}
             <Route path="*" element={<NotFound />} />
 
@@ -97,5 +102,6 @@ export default function App() {
         <Footer />
       </div>
     </BrowserRouter>
+    </AuthProvider>
   );
 }

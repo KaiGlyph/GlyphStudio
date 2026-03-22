@@ -1,0 +1,324 @@
+/* ========================================
+   LOGIN — ESTILOS
+   ======================================== */
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+  position: relative;
+}
+
+.login-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, var(--glow-blue) 0%, transparent 70%);
+  opacity: 0.1;
+  pointer-events: none;
+  filter: blur(80px);
+}
+
+/* ── Tarjeta ── */
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--bg-darker);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: fadeInUp 0.6s ease-out both;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Logo solo texto ── */
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-logo-text {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--accent-blue);
+  letter-spacing: 0.08em;
+}
+
+/* ── Textos ── */
+
+.login-title {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+}
+
+.login-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Botón Google ── */
+
+.btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.8rem 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-google:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-google:disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* ── Separador ── */
+
+.login-separator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.login-separator span {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.login-separator p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+  white-space: nowrap;
+  opacity: 0.6;
+}
+
+/* ── Formulario ── */
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.login-field-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.03em;
+}
+
+.login-field input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-field input:focus {
+  border-color: var(--accent-blue);
+  background: rgba(96, 165, 250, 0.05);
+}
+
+.login-field input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Hint de campo */
+.login-field-hint {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  line-height: 1.4;
+}
+
+/* Indicador de coincidencia de contraseñas */
+.login-field-match {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.login-field-match.ok  { color: #34d399; }
+.login-field-match.no  { color: #f87171; }
+
+/* ── Olvidé contraseña ── */
+
+.btn-forgot {
+  background: none;
+  border: none;
+  color: var(--accent-blue);
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.btn-forgot:hover { opacity: 1; }
+
+/* ── Mensajes ── */
+
+.login-error {
+  font-size: 0.85rem;
+  color: #f87171;
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.2);
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.login-info {
+  font-size: 0.85rem;
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Botón submit ── */
+
+.btn-login-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.875rem;
+  background: var(--accent-blue);
+  color: var(--bg-dark);
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-top: 0.25rem;
+}
+
+.btn-login-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(96, 165, 250, 0.4);
+}
+
+.btn-login-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+/* ── Spinner ── */
+
+.login-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: var(--bg-dark);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Cambiar modo ── */
+
+.login-switch {
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.btn-switch-modo {
+  background: none;
+  border: none;
+  color: var(--accent-blue);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  transition: opacity 0.2s;
+}
+
+.btn-switch-modo:hover { opacity: 0.8; }
+
+/* ── Legal ── */
+
+.login-legal {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.login-legal a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.login-legal a:hover { opacity: 1; color: var(--accent-blue); }
+
+/* ── Animaciones ── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
