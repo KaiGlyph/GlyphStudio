@@ -11,13 +11,16 @@ export default function Header() {
   const navigate  = useNavigate();
   const { user, cerrarSesion } = useAuth();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile,   setIsMobile]   = useState(window.innerWidth < 768);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
+  const [isMenuOpen,     setIsMenuOpen]     = useState(false);
+  const [isUserOpen,     setIsUserOpen]     = useState(false);
+  const [isMobile,       setIsMobile]       = useState(window.innerWidth < 768);
+  const [isDarkMode,     setIsDarkMode]     = useState(() => {
     const saved = localStorage.getItem('theme');
     return saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
   });
-  const menuRef = useRef<HTMLDivElement>(null);
+
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const userMenuRef   = useRef<HTMLDivElement>(null);
 
   const navLinks = [
     { to: '/',               label: 'Inicio' },
@@ -26,6 +29,7 @@ export default function Header() {
     { to: '/contacto',       label: 'Contacto' },
   ];
 
+  // Tema
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
@@ -38,6 +42,7 @@ export default function Header() {
     }
   }, [isDarkMode]);
 
+  // Resize
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -47,28 +52,57 @@ export default function Header() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Cerrar menús al hacer clic fuera
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target as Node)) {
         setIsMenuOpen(false);
       }
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setIsUserOpen(false);
+      }
     };
-    if (isMenuOpen) document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isMenuOpen]);
+  }, []);
 
-  useEffect(() => { setIsMenuOpen(false); }, [location.pathname]);
+  // Cerrar al cambiar de ruta
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setIsUserOpen(false);
+  }, [location.pathname]);
 
+  // Bloquear scroll en menú móvil
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [isMenuOpen]);
 
+  function toggleTheme() {
+    setIsDarkMode(prev => !prev);
+    setIsUserOpen(false);
+  }
+
+  async function handleCerrarSesion() {
+    setIsUserOpen(false);
+    await cerrarSesion();
+    navigate('/');
+  }
+
+  // Inicial del usuario para el avatar
+  const userInitial = user
+    ? (user.user_metadata?.username?.[0] ?? user.email?.[0] ?? 'U').toUpperCase()
+    : null;
+
+  const username = user
+    ? (user.user_metadata?.username ?? user.email?.split('@')[0])
+    : null;
+
   return (
     <>
       <header className="header">
 
-        {/* Logo — imagen + texto, sin cuadrado */}
+        {/* Logo */}
         <Link to="/" className="header-logo" onClick={() => setIsMenuOpen(false)}>
           <img
             src={isDarkMode ? logoBlanco : logoNegro}
@@ -100,47 +134,112 @@ export default function Header() {
             </nav>
           )}
 
-          {/* Usuario / Login — solo escritorio */}
-          {!isMobile && (
-            user ? (
-              <div className="header-user">
-                <div className="header-avatar">
-                  {(user.user_metadata?.username?.[0] ?? user.email?.[0] ?? 'U').toUpperCase()}
-                </div>
-                <span className="header-username">
-                  {user.user_metadata?.username ?? user.email?.split('@')[0]}
-                </span>
-                <button className="btn-logout" onClick={cerrarSesion}>Salir</button>
-              </div>
-            ) : (
-              <button className="btn-login-header" onClick={() => navigate('/login')}>
-                Iniciar sesión
-              </button>
-            )
-          )}
+          {/* Botón usuario con dropdown */}
+          <div className="user-menu-wrapper" ref={userMenuRef}>
+            <button
+              className={`btn-user-icon ${isUserOpen ? 'open' : ''} ${user ? 'logged' : ''}`}
+              onClick={() => setIsUserOpen(prev => !prev)}
+              aria-label="Menú de usuario"
+              aria-expanded={isUserOpen}
+            >
+              {user ? (
+                <div className="user-avatar-small">{userInitial}</div>
+              ) : (
+                /* Icono de usuario anónimo */
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              )}
+            </button>
 
-          {/* Toggle tema */}
-          <button
-            className="btn-theme"
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            aria-label={`Cambiar a modo ${isDarkMode ? 'claro' : 'oscuro'}`}
-          >
-            {isDarkMode ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
+            {/* Dropdown */}
+            {isUserOpen && (
+              <div className="user-dropdown">
+
+                {/* Info usuario si está logueado */}
+                {user && (
+                  <div className="dropdown-user-info">
+                    <div className="dropdown-avatar">{userInitial}</div>
+                    <div>
+                      <p className="dropdown-username">{username}</p>
+                      <p className="dropdown-email">{user.email}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Opciones si NO está logueado */}
+                {!user && (
+                  <>
+                    <button
+                      className="dropdown-item dropdown-item-primary"
+                      onClick={() => { navigate('/login'); setIsUserOpen(false); }}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                        <polyline points="10 17 15 12 10 7" />
+                        <line x1="15" y1="12" x2="3" y2="12" />
+                      </svg>
+                      Iniciar sesión
+                    </button>
+                    <button
+                      className="dropdown-item"
+                      onClick={() => { navigate('/login'); setIsUserOpen(false); }}
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <line x1="19" y1="8" x2="19" y2="14" />
+                        <line x1="22" y1="11" x2="16" y2="11" />
+                      </svg>
+                      Registrarse gratis
+                    </button>
+                    <div className="dropdown-separator" />
+                  </>
+                )}
+
+                {/* Toggle tema — siempre visible */}
+                <button className="dropdown-item" onClick={toggleTheme}>
+                  {isDarkMode ? (
+                    <>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                      </svg>
+                      Modo claro
+                    </>
+                  ) : (
+                    <>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                      </svg>
+                      Modo oscuro
+                    </>
+                  )}
+                </button>
+
+                {/* Cerrar sesión — solo si logueado */}
+                {user && (
+                  <>
+                    <div className="dropdown-separator" />
+                    <button className="dropdown-item dropdown-item-danger" onClick={handleCerrarSesion}>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                        <polyline points="16 17 21 12 16 7" />
+                        <line x1="21" y1="12" x2="9" y2="12" />
+                      </svg>
+                      Cerrar sesión
+                    </button>
+                  </>
+                )}
+
+              </div>
             )}
-          </button>
+          </div>
 
           {/* Hamburguesa — solo móvil */}
           {isMobile && (
@@ -160,8 +259,8 @@ export default function Header() {
 
       {/* Menú móvil */}
       {isMenuOpen && isMobile && (
-        <div ref={menuRef} className="mobile-menu">
-          <button className="mobile-menu-close" onClick={() => setIsMenuOpen(false)} aria-label="Cerrar menú">✕</button>
+        <div ref={mobileMenuRef} className="mobile-menu">
+          <button className="mobile-menu-close" onClick={() => setIsMenuOpen(false)}>✕</button>
 
           {navLinks.map(({ to, label }) => {
             const isActive = location.pathname === to;
@@ -172,15 +271,14 @@ export default function Header() {
             );
           })}
 
-          {/* Login/usuario en móvil */}
-          {user ? (
-            <button className="mobile-menu-link mobile-logout" onClick={() => { cerrarSesion(); setIsMenuOpen(false); }}>
-              Cerrar sesión
-            </button>
-          ) : (
+          {!user ? (
             <Link to="/login" className="mobile-menu-link mobile-login">
               Iniciar sesión
             </Link>
+          ) : (
+            <button className="mobile-menu-link mobile-logout" onClick={handleCerrarSesion}>
+              Cerrar sesión
+            </button>
           )}
         </div>
       )}
