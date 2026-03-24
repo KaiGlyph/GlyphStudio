@@ -7,19 +7,23 @@ import { supabase } from '../lib/supabase';
 // ─── Tipos ───────────────────────────────────────────────────────────────────
 
 interface AuthContextType {
-  user:          User | null;
-  session:       Session | null;
-  cargando:      boolean;
-  cerrarSesion:  () => Promise<void>;
+  user:            User | null;
+  session:         Session | null;
+  cargando:        boolean;
+  cerrarSesion:    () => Promise<void>;
+  loginConGoogle:  () => Promise<void>;   // ← nuevo
+  loginConGitHub:  () => Promise<void>;   // ← nuevo
 }
 
-// ─── Contexto ────────────────────────────────────────────────────────────────
+// ─── Contexto (valores por defecto) ──────────────────────────────────────────
 
 const AuthContext = createContext<AuthContextType>({
-  user:         null,
-  session:      null,
-  cargando:     true,
-  cerrarSesion: async () => {},
+  user:            null,
+  session:         null,
+  cargando:        true,
+  cerrarSesion:    async () => {},
+  loginConGoogle:  async () => {},        // ← nuevo
+  loginConGitHub:  async () => {},        // ← nuevo
 });
 
 // ─── Provider ────────────────────────────────────────────────────────────────
@@ -51,8 +55,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await supabase.auth.signOut();
   }
 
+  async function loginConGoogle() {
+  await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin,   // vuelve a la raíz tras login
+      },
+    });
+  }
+
+  async function loginConGitHub() {
+    await supabase.auth.signInWithOAuth({
+      provider: 'github',
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+  }
+
   return (
-    <AuthContext.Provider value={{ user, session, cargando, cerrarSesion }}>
+    <AuthContext.Provider value={{ user, session, cargando, cerrarSesion, loginConGoogle, loginConGitHub }}>
       {children}
     </AuthContext.Provider>
   );
