@@ -133,6 +133,20 @@ export default function Header() {
               </ul>
             </nav>
           )}
+          
+          {/* Hamburguesa — solo móvil */}
+          {isMobile && (
+            <button
+              className="btn-hamburger"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Abrir menú"
+              aria-expanded={isMenuOpen}
+            >
+              <span className={`hamburger-line hamburger-line-1 ${isMenuOpen ? 'open' : ''}`} />
+              <span className={`hamburger-line hamburger-line-2 ${isMenuOpen ? 'open' : ''}`} />
+              <span className={`hamburger-line hamburger-line-3 ${isMenuOpen ? 'open' : ''}`} />
+            </button>
+          )}
 
           {/* Botón usuario con dropdown */}
           <div className="user-menu-wrapper" ref={userMenuRef}>
@@ -241,19 +255,7 @@ export default function Header() {
             )}
           </div>
 
-          {/* Hamburguesa — solo móvil */}
-          {isMobile && (
-            <button
-              className="btn-hamburger"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Abrir menú"
-              aria-expanded={isMenuOpen}
-            >
-              <span className={`hamburger-line hamburger-line-1 ${isMenuOpen ? 'open' : ''}`} />
-              <span className={`hamburger-line hamburger-line-2 ${isMenuOpen ? 'open' : ''}`} />
-              <span className={`hamburger-line hamburger-line-3 ${isMenuOpen ? 'open' : ''}`} />
-            </button>
-          )}
+
         </div>
       </header>
 
@@ -270,16 +272,6 @@ export default function Header() {
               </Link>
             );
           })}
-
-          {!user ? (
-            <Link to="/login" className="mobile-menu-link mobile-login">
-              Iniciar sesión
-            </Link>
-          ) : (
-            <button className="mobile-menu-link mobile-logout" onClick={handleCerrarSesion}>
-              Cerrar sesión
-            </button>
-          )}
         </div>
       )}
     </>
