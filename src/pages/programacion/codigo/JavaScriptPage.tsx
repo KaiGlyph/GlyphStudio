@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useProgreso } from '../../../hooks/useProgreso';
 import './JavaScriptPage.css';
 
 // ─── Datos del curso ────────────────────────────────────────────────────────
@@ -352,35 +353,67 @@ btnMenos.addEventListener("click", () => {
 
 export default function JavaScriptPage() {
   const navigate = useNavigate();
-  const [moduloActivo, setModuloActivo] = useState(0);
-  const [completados, setCompletados] = useState<number[]>([]);
+
+  // ── Estado local ──
+  const [moduloActivo,    setModuloActivo]    = useState(0);
   const [mostrarSolucion, setMostrarSolucion] = useState(false);
-  const [mostrarEjercicio, setMostrarEjercicio] = useState(false);
+  const [mostrarEjercicio,setMostrarEjercicio]= useState(false);
+
+  // ── Progreso persistido en Supabase ──
+  const { progreso, cargando, guardarProgreso } = useProgreso('javascript', modulos.length);
+  const completados = progreso.completados;
+  const porcentaje  = progreso.porcentaje;
+
+  // Restaurar módulo activo cuando carga el progreso desde Supabase
+  useEffect(() => {
+    if (!cargando && progreso.moduloActivo > 0) {
+      setModuloActivo(progreso.moduloActivo);
+    }
+  }, [cargando]);
 
   const modulo = modulos[moduloActivo];
-  const progreso = Math.round((completados.length / modulos.length) * 100);
 
-  function marcarCompletado(id: number) {
-    if (!completados.includes(id)) {
-      setCompletados([...completados, id]);
-    }
-  }
+  // ── Acciones ──
 
   function irSiguiente() {
-    marcarCompletado(modulo.id);
+    const nuevosCompletados = completados.includes(modulo.id)
+      ? completados
+      : [...completados, modulo.id];
+
+    const siguienteModulo = moduloActivo < modulos.length - 1
+      ? moduloActivo + 1
+      : moduloActivo;
+
+    guardarProgreso(nuevosCompletados, siguienteModulo, modulos.length);
+
     setMostrarSolucion(false);
     setMostrarEjercicio(false);
+
     if (moduloActivo < modulos.length - 1) {
-      setModuloActivo(moduloActivo + 1);
+      setModuloActivo(siguienteModulo);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
 
   function seleccionarModulo(index: number) {
+    // Guarda el módulo activo actual antes de cambiar
+    guardarProgreso(completados, index, modulos.length);
     setModuloActivo(index);
     setMostrarSolucion(false);
     setMostrarEjercicio(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Render ──
+
+  if (cargando) {
+    return (
+      <main className="js-page">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
+          <span className="login-spinner" style={{ width: 32, height: 32, borderWidth: 3 }} />
+        </div>
+      </main>
+    );
   }
 
   return (
@@ -411,10 +444,10 @@ export default function JavaScriptPage() {
           <div className="progreso-wrapper">
             <div className="progreso-label">
               <span>Progreso</span>
-              <span className="progreso-pct js-pct">{progreso}%</span>
+              <span className="progreso-pct js-pct">{porcentaje}%</span>
             </div>
             <div className="progreso-bar">
-              <div className="progreso-fill js-fill" style={{ width: `${progreso}%` }} />
+              <div className="progreso-fill js-fill" style={{ width: `${porcentaje}%` }} />
             </div>
             <p className="progreso-info">{completados.length} de {modulos.length} completados</p>
           </div>
@@ -423,7 +456,7 @@ export default function JavaScriptPage() {
           <nav className="modulos-nav">
             {modulos.map((m, index) => {
               const completado = completados.includes(m.id);
-              const activo = moduloActivo === index;
+              const activo     = moduloActivo === index;
               return (
                 <button
                   key={m.id}

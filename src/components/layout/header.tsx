@@ -133,7 +133,7 @@ export default function Header() {
               </ul>
             </nav>
           )}
-          
+
           {/* Hamburguesa — solo móvil */}
           {isMobile && (
             <button
@@ -199,7 +199,7 @@ export default function Header() {
                     </button>
                     <button
                       className="dropdown-item"
-                      onClick={() => { navigate('/login'); setIsUserOpen(false); }}
+                      onClick={() => { navigate('/login?modo=registro'); setIsUserOpen(false); }}
                     >
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />

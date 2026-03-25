@@ -1,6 +1,6 @@
 // src/pages/Login.tsx
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import './Login.css';
 
@@ -8,7 +8,11 @@ type Modo = 'login' | 'registro';
 
 export default function Login() {
   const navigate = useNavigate();
-  const [modo,             setModo]            = useState<Modo>('login');
+  const [searchParams] = useSearchParams();
+
+  const [modo,             setModo]            = useState<Modo>(
+    searchParams.get('modo') === 'registro' ? 'registro' : 'login'
+  );
   const [email,            setEmail]           = useState('');
   const [username,         setUsername]        = useState('');
   const [password,         setPassword]        = useState('');
@@ -21,6 +25,13 @@ export default function Login() {
     setEmail(''); setUsername(''); setPassword(''); setPasswordConfirm('');
     setError(''); setInfo('');
   }
+
+  // Reacciona a cambios en la URL sin desmontar el componente
+  useEffect(() => {
+    const nuevoModo = searchParams.get('modo') === 'registro' ? 'registro' : 'login';
+    setModo(nuevoModo);
+    resetForm();
+  }, [searchParams]);
 
   async function handleEmail(e: React.FormEvent) {
     e.preventDefault();
