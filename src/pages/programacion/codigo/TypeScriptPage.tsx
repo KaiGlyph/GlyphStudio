@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './TypeScriptPage.css';
+import CoursePage from '../../../components/CoursePage/CoursePage';
 
-// ─── Datos del curso ────────────────────────────────────────────────────────
+// ─── Datos del curso TypeScript ──────────────────────────────────────────────
 
 const modulos = [
   {
@@ -296,7 +294,7 @@ const numeros = [1, 8, 3, 9, 2, 7, 4];
 const grandes = filtrar(numeros, n => n > 5);
 console.log(grandes);  // [8, 9, 7]
 
-// Filtrar strings que empiezan por "A"
+// Filtrar strings que empiecen por "A"
 const nombres = ["Ana", "Carlos", "Alba", "Pedro", "Andrea"];
 const conA = filtrar(nombres, s => s.startsWith("A"));
 console.log(conA);  // ["Ana", "Alba", "Andrea"]`,
@@ -412,218 +410,15 @@ function ContadorConHistorial(): JSX.Element {
   },
 ];
 
-// ─── Componente principal ────────────────────────────────────────────────────
+// ─── Componente simplificado ─────────────────────────────────────────────────
 
 export default function TypeScriptPage() {
-  const navigate = useNavigate();
-  const [moduloActivo, setModuloActivo] = useState(0);
-  const [completados, setCompletados]   = useState<number[]>([]);
-  const [mostrarSolucion, setMostrarSolucion]   = useState(false);
-  const [mostrarEjercicio, setMostrarEjercicio] = useState(false);
-
-  const modulo   = modulos[moduloActivo];
-  const progreso = Math.round((completados.length / modulos.length) * 100);
-
-  function marcarCompletado(id: number) {
-    if (!completados.includes(id)) setCompletados([...completados, id]);
-  }
-
-  function irSiguiente() {
-    marcarCompletado(modulo.id);
-    setMostrarSolucion(false);
-    setMostrarEjercicio(false);
-    if (moduloActivo < modulos.length - 1) {
-      setModuloActivo(moduloActivo + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  }
-
-  function seleccionarModulo(index: number) {
-    setModuloActivo(index);
-    setMostrarSolucion(false);
-    setMostrarEjercicio(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
   return (
-    <main className="ts-page">
-      <div className="ts-layout">
-
-        {/* ── Sidebar ─────────────────────────────── */}
-        <aside className="ts-sidebar">
-          <button className="btn-back-sidebar ts-back" onClick={() => navigate('/programacion/codigo')}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12" />
-              <polyline points="12 19 5 12 12 5" />
-            </svg>
-            Volver
-          </button>
-
-          <div className="sidebar-header">
-            <div className="ts-logo">
-              <span>TS</span>
-            </div>
-            <div>
-              <h2 className="sidebar-title">TypeScript</h2>
-              <p className="sidebar-subtitle">{modulos.length} módulos</p>
-            </div>
-          </div>
-
-          <div className="progreso-wrapper">
-            <div className="progreso-label">
-              <span>Progreso</span>
-              <span className="ts-pct">{progreso}%</span>
-            </div>
-            <div className="progreso-bar">
-              <div className="ts-fill" style={{ width: `${progreso}%` }} />
-            </div>
-            <p className="progreso-info">{completados.length} de {modulos.length} completados</p>
-          </div>
-
-          <nav className="modulos-nav">
-            {modulos.map((m, index) => {
-              const completado = completados.includes(m.id);
-              const activo     = moduloActivo === index;
-              return (
-                <button
-                  key={m.id}
-                  className={`modulo-btn ${activo ? 'ts-activo' : ''} ${completado ? 'ts-completado' : ''}`}
-                  onClick={() => seleccionarModulo(index)}
-                >
-                  <span className={`modulo-num ${activo ? 'ts-num-activo' : ''} ${completado ? 'ts-num-done' : ''}`}>
-                    {completado
-                      ? <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                      : m.id}
-                  </span>
-                  <span className="modulo-nombre">{m.titulo}</span>
-                  <span className="modulo-duracion">{m.duracion}</span>
-                </button>
-              );
-            })}
-          </nav>
-        </aside>
-
-        {/* ── Contenido ───────────────────────────── */}
-        <div className="ts-content">
-
-          <header className="modulo-header">
-            <div className="modulo-meta">
-              <span className="ts-badge">Módulo {modulo.id}</span>
-              <span className="modulo-tiempo">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
-                </svg>
-                {modulo.duracion}
-              </span>
-            </div>
-            <h1 className="ts-titulo">{modulo.titulo}</h1>
-            <p className="modulo-desc">{modulo.descripcion}</p>
-          </header>
-
-          <div className="ts-glow" />
-
-          {/* Teoría */}
-          <section className="seccion">
-            <div className="ts-label">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" /><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-              </svg>
-              Teoría
-            </div>
-            <div className="teoria-body">
-              {modulo.teoria.split('\n\n').map((p, i) => (
-                <p key={i} className="teoria-parrafo">{p}</p>
-              ))}
-            </div>
-          </section>
-
-          {/* Código */}
-          <section className="seccion">
-            <div className="ts-label">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="16 18 22 12 16 6" /><polyline points="8 6 2 12 8 18" />
-              </svg>
-              Ejemplo de código
-            </div>
-            <div className="ts-codigo-block">
-              <div className="codigo-header">
-                <div className="codigo-dots">
-                  <span /><span /><span />
-                </div>
-                <span className="codigo-titulo">{modulo.codigo.titulo}</span>
-                <span className="ts-lang">{modulo.codigo.lenguaje}</span>
-              </div>
-              <pre className="ts-pre"><code>{modulo.codigo.contenido}</code></pre>
-            </div>
-          </section>
-
-          {/* Ejercicio */}
-          <section className="seccion">
-            <div className="ts-label">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" />
-              </svg>
-              Ejercicio práctico
-            </div>
-            <div className={`ts-ejercicio ${mostrarEjercicio ? 'ts-abierto' : ''}`}>
-              {!mostrarEjercicio ? (
-                <button className="ejercicio-reveal ts-reveal" onClick={() => setMostrarEjercicio(true)}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                  Ver ejercicio
-                </button>
-              ) : (
-                <>
-                  <p className="ejercicio-enunciado">{modulo.ejercicio.enunciado}</p>
-                  <div className="ts-pista">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3178c6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-                    </svg>
-                    <span><strong>Pista:</strong> {modulo.ejercicio.pista}</span>
-                  </div>
-                  {!mostrarSolucion ? (
-                    <button className="btn-solucion ts-btn-sol" onClick={() => setMostrarSolucion(true)}>
-                      Mostrar solución
-                    </button>
-                  ) : (
-                    <div className="solucion-block">
-                      <p className="ts-sol-label">Solución</p>
-                      <pre className="ts-pre ts-solucion-pre"><code>{modulo.ejercicio.solucion}</code></pre>
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
-          </section>
-
-          {/* Navegación */}
-          <div className="modulo-footer">
-            {moduloActivo > 0 && (
-              <button className="btn-nav btn-prev" onClick={() => seleccionarModulo(moduloActivo - 1)}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" />
-                </svg>
-                Módulo anterior
-              </button>
-            )}
-            <button className="btn-nav ts-btn-next" onClick={irSiguiente}>
-              {moduloActivo < modulos.length - 1 ? (
-                <>Marcar y continuar
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </>
-              ) : (
-                <><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>Completar curso</>
-              )}
-            </button>
-          </div>
-
-        </div>
-      </div>
-    </main>
+    <CoursePage
+      courseId="typescript"
+      courseName="TypeScript"
+      courseLogo="TS"
+      modulos={modulos}
+    />
   );
 }

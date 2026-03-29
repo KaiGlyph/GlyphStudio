@@ -1,0 +1,224 @@
+/* ========================================
+   REACT PAGE — ESTILOS
+   Acento: cyan React (#61dafb / #3abff8)
+   ======================================== */
+
+/* ─── VARIABLES DE COLOR (CAMBIAR SOLO AQUÍ) ─── */
+.react-page {
+  --course-primary: #61dafb;              /* Cyan React */
+  --course-secondary: #3abff8;            /* Cyan claro */
+  --course-code: #a5f3fc;                 /* Cyan muy claro para código */
+  --course-text: #20232a;                 /* Texto oscuro sobre cyan */
+  --course-glow: rgba(97, 218, 251, 0.12);
+  --course-border: rgba(97, 218, 251, 0.12);
+  --course-bg: rgba(97, 218, 251, 0.05);
+  --course-bg-light: rgba(97, 218, 251, 0.07);
+  --course-shadow: rgba(97, 218, 251, 0.35);
+}
+
+/* ─── Layout ─── */
+.react-page {
+  min-height: 100vh;
+  padding-top: 5rem;
+  background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+}
+
+.react-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 4.5rem);
+  padding: 0 1.5rem 4rem;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ─── Sidebar ─── */
+.react-sidebar {
+  position: sticky;
+  top: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInLeft 0.6s ease-out both;
+}
+
+/* Logo React con animación */
+.react-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: transparent !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--course-primary) !important;
+  flex-shrink: 0;
+  animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Barra de progreso ─── */
+.react-pct {
+  color: var(--course-primary) !important;
+}
+
+.react-fill {
+  background: linear-gradient(90deg, var(--course-primary), var(--course-secondary)) !important;
+  box-shadow: 0 0 10px rgba(97, 218, 251, 0.5);
+}
+
+/* ─── Lista de módulos ─── */
+.modulo-btn.activo-react {
+  background: var(--course-bg-light);
+  border-color: var(--course-border);
+}
+
+.num-react {
+  background: var(--course-primary) !important;
+  color: var(--course-text) !important;
+  border-color: var(--course-primary) !important;
+}
+
+.num-react-done {
+  background: var(--course-bg) !important;
+  color: var(--course-primary) !important;
+  border-color: var(--course-primary) !important;
+}
+
+/* ─── Contenido principal ─── */
+.react-content {
+  padding: 2rem 0 0;
+  animation: fadeInUp 0.7s ease-out 0.1s both;
+  position: relative;
+}
+
+.react-glow {
+  position: absolute;
+  top: -2rem;
+  right: -4rem;
+  width: 400px;
+  height: 300px;
+  background: radial-gradient(ellipse, var(--course-glow) 0%, transparent 70%);
+  opacity: 0.1;
+  pointer-events: none;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.react-badge {
+  background: var(--course-bg) !important;
+  border: 1px solid var(--course-border) !important;
+  color: var(--course-primary) !important;
+}
+
+.react-titulo {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--course-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Código (texto en cyan claro) ─── */
+.react-block .codigo-pre {
+  color: var(--course-code) !important;
+}
+
+/* ─── Secciones ─── */
+.react-label {
+  color: var(--course-primary) !important;
+}
+
+/* ─── Bloque de código ─── */
+.react-block {
+  border: 1px solid var(--course-border) !important;
+}
+
+.react-block .codigo-header {
+  background: var(--course-bg);
+}
+
+.react-lang {
+  color: var(--course-primary) !important;
+}
+
+/* ─── Ejercicio ─── */
+.react-ejercicio {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.react-ejercicio.abierto {
+  border-color: var(--course-border);
+}
+
+.react-pista {
+  background: var(--course-bg);
+  border: 1px solid var(--course-border);
+}
+
+.react-pista svg {
+  stroke: var(--course-primary);
+}
+
+.react-sol-label {
+  color: var(--course-primary) !important;
+}
+
+.react-solucion-pre {
+  border: 1px solid var(--course-border) !important;
+}
+
+/* ─── Botón siguiente ─── */
+.btn-next-react {
+  background: var(--course-primary) !important;
+  color: var(--course-text) !important;
+  font-weight: 700;
+}
+
+.btn-next-react:hover {
+  background: var(--course-secondary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--course-shadow) !important;
+}
+
+/* ─── Botón volver ─── */
+.react-sidebar .btn-back-sidebar:hover {
+  color: var(--course-primary) !important;
+}
+
+/* ─── Animaciones ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .react-layout {
+    grid-template-columns: 1fr;
+    padding: 0 1.25rem 3rem;
+  }
+
+  .react-sidebar {
+    position: static;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 1.5rem;
+  }
+
+  .react-content {
+    padding-top: 1.5rem;
+  }
+}

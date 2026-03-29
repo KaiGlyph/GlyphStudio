@@ -39,11 +39,11 @@ export function useProgreso(cursoId: string, totalModulos: number): UseProgresoR
     async function cargar() {
       setCargando(true);
       const { data, error } = await supabase
-        .from('progreso')
-        .select('*')
-        .eq('user_id', user!.id)
-        .eq('curso_id', cursoId)
-        .single();
+      .from('progreso_cursos')
+      .select('*')
+      .eq('user_id', user!.id)
+      .eq('curso_id', cursoId)
+      .single();
 
       if (error && error.code !== 'PGRST116') {
         // PGRST116 = no rows found, no es un error real
@@ -78,7 +78,7 @@ export function useProgreso(cursoId: string, totalModulos: number): UseProgresoR
     setProgreso({ completados, moduloActivo, porcentaje });
 
     const { error } = await supabase
-      .from('progreso')
+      .from('progreso_cursos')
       .upsert(
         {
           user_id:       user.id,

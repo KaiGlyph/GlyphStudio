@@ -1,0 +1,226 @@
+/* ========================================
+   JAVASCRIPT PAGE — ESTILOS
+   Acento: amarillo JS (#f7df1e / #ca9b00)
+   ======================================== */
+
+/* ─── VARIABLES DE COLOR (CAMBIAR SOLO AQUÍ) ─── */
+.javascript-page {
+  --course-primary: #ca9b00;              /* Amarillo oscuro (botones, badges) */
+  --course-secondary: #f7df1e;            /* Amarillo medio (títulos, hover) */
+  --course-code: #fef08a;                 /* Amarillo claro (código) */
+  --course-text: #1a1a1a;                 /* Texto sobre fondo amarillo */
+  --course-glow: rgba(247, 223, 30, 0.15);
+  --course-border: rgba(247, 223, 30, 0.12);
+  --course-bg: rgba(247, 223, 30, 0.05);
+  --course-bg-light: rgba(247, 223, 30, 0.07);
+  --course-shadow: rgba(247, 223, 30, 0.35);
+}
+
+/* ─── Layout ─── */
+.javascript-page {
+  min-height: 100vh;
+  padding-top: 5rem;
+  background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+}
+
+.javascript-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 4.5rem);
+  padding: 0 1.5rem 4rem;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ─── Sidebar ─── */
+.javascript-sidebar {
+  position: sticky;
+  top: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInLeft 0.6s ease-out both;
+}
+
+/* Logo JS */
+.javascript-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--course-secondary), var(--course-primary)) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--course-text) !important;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px var(--course-shadow) !important;
+}
+
+/* ─── Barra de progreso ─── */
+.javascript-pct {
+  color: var(--course-primary) !important;
+}
+
+.javascript-fill {
+  background: linear-gradient(90deg, var(--course-primary), var(--course-secondary)) !important;
+}
+
+/* ─── Lista de módulos ─── */
+.modulo-btn.activo-javascript {
+  background: var(--course-bg-light);
+  border-color: var(--course-border);
+}
+
+.num-javascript {
+  background: var(--course-primary) !important;
+  color: var(--course-text) !important;
+  border-color: var(--course-primary) !important;
+}
+
+.num-javascript-done {
+  background: var(--course-bg) !important;
+  color: var(--course-primary) !important;
+  border-color: var(--course-primary) !important;
+}
+
+/* ─── Contenido principal ─── */
+.javascript-content {
+  padding: 2rem 0 0;
+  animation: fadeInUp 0.7s ease-out 0.1s both;
+  position: relative;
+}
+
+.javascript-glow {
+  position: absolute;
+  top: -2rem;
+  right: -4rem;
+  width: 400px;
+  height: 300px;
+  background: radial-gradient(ellipse, var(--course-glow) 0%, transparent 70%);
+  opacity: 0.1;
+  pointer-events: none;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.javascript-badge {
+  background: var(--course-bg) !important;
+  border: 1px solid rgba(247, 223, 30, 0.25) !important;
+  color: var(--course-primary) !important;
+}
+
+.javascript-titulo {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--course-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Código (texto en amarillo claro) ─── */
+.javascript-block .codigo-pre {
+  color: var(--course-code) !important;
+}
+
+/* ─── Secciones ─── */
+.javascript-label {
+  color: var(--course-primary) !important;
+}
+
+/* ─── Bloque de código ─── */
+.javascript-block {
+  border: 1px solid var(--course-border) !important;
+}
+
+.javascript-block .codigo-header {
+  background: var(--course-bg);
+}
+
+.javascript-lang {
+  color: var(--course-secondary) !important;
+}
+
+/* ─── Ejercicio ─── */
+.javascript-ejercicio {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.javascript-ejercicio.abierto {
+  border-color: var(--course-border);
+}
+
+.javascript-pista {
+  background: var(--course-bg);
+  border: 1px solid var(--course-border);
+}
+
+.javascript-pista svg {
+  stroke: var(--course-primary);
+}
+
+.javascript-sol-label {
+  color: var(--course-primary) !important;
+}
+
+.javascript-solucion-pre {
+  border: 1px solid var(--course-border) !important;
+}
+
+/* ─── Botón siguiente ─── */
+.btn-next-javascript {
+  background: var(--course-primary) !important;
+  color: var(--course-text) !important;
+  font-weight: 700;
+}
+
+.btn-next-javascript:hover {
+  background: var(--course-secondary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--course-shadow) !important;
+}
+
+/* ─── Botón volver ─── */
+.javascript-sidebar .btn-back-sidebar {
+  color: var(--text-secondary);
+}
+
+.javascript-sidebar .btn-back-sidebar:hover {
+  color: var(--course-primary) !important;
+}
+
+.javascript-sidebar .btn-back-sidebar svg {
+  stroke: currentColor;
+}
+
+/* ─── Animaciones ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .javascript-layout {
+    grid-template-columns: 1fr;
+    padding: 0 1.25rem 3rem;
+  }
+
+  .javascript-sidebar {
+    position: static;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 1.5rem;
+  }
+
+  .javascript-content {
+    padding-top: 1.5rem;
+  }
+}

@@ -1,21 +1,14 @@
 /* ========================================
    ESTILOS COMPARTIDOS — PÁGINAS DE CURSO
-   Responsive fixes aplicados a todos los cursos
    ======================================== */
 
-/* ─── Fix global: nada puede desbordar ─── */
+/* ─── Fix global ─── */
 * {
   min-width: 0;
 }
 
 /* ─── Layouts de curso ─── */
-
-.python-layout,
-.js-layout,
-.ts-layout,
-.react-layout,
-.ladder-layout,
-.tia-layout {
+[class$="-layout"] {
   display: grid;
   grid-template-columns: 300px 1fr;
   max-width: 1200px;
@@ -24,123 +17,569 @@
   padding: 0 1.5rem 4rem;
   gap: 3rem;
   align-items: start;
-  /* Evita que el grid desborde */
   width: 100%;
   box-sizing: border-box;
 }
 
 /* ─── Contenido principal ─── */
-
-.python-content,
-.js-content,
-.ts-content,
-.react-content,
-.ladder-content,
-.tia-content {
-  /* Limita el ancho al espacio disponible */
+[class$="-content"] {
   min-width: 0;
+  overflow: hidden;
+  padding: 2rem 0 0;
+  animation: fadeInUp 0.7s ease-out 0.1s both;
+  position: relative;
+}
+
+/* ─── Sidebar ─── */
+[class$="-sidebar"] {
+  position: sticky;
+  top: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInLeft 0.6s ease-out both;
+  min-width: 0;
+}
+
+/* ─── Botón Volver ─── */
+.btn-back-sidebar {
+  display: inline;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition, all 0.2s ease);
+  opacity: 0.7;
+  width: fit-content;
+}
+
+.btn-back-sidebar:hover {
+  color: var(--accent-blue, #60a5fa);
+  opacity: 1;
+  transform: translateX(-3px);
+}
+
+.btn-back-sidebar svg{
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+/* ─── Header del sidebar ─── */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sidebar-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.sidebar-title {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  margin: 0;
+}
+
+.sidebar-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+[class$="-page"] {
+  padding-top: 5rem; /* Espacio para el Header fijo */
+}
+
+/* ─── Barra de progreso ─── */
+.progreso-wrapper {
+  background: var(--bg-darker);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+.progreso-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.6rem;
+}
+
+.progreso-pct {
+  color: var(--accent-blue);
+  font-weight: 700;
+  font-family: 'Orbitron', monospace;
+}
+
+.progreso-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 99px;
   overflow: hidden;
 }
 
-/* ─── Bloques de código: el fix más importante ─── */
+.progreso-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-blue), #93c5fd);
+  border-radius: 99px;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
-.codigo-block,
-.js-block,
-.ts-codigo-block,
-.react-codigo-block,
-.ladder-codigo-block,
-.tia-codigo-block,
-.ejercicio-card,
-.js-ejercicio,
-.ts-ejercicio,
-.react-ejercicio,
-.ladder-ejercicio,
-.tia-ejercicio {
-  /* Nunca más ancho que el contenedor */
+.progreso-info {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin: 0.5rem 0 0;
+  opacity: 0.7;
+}
+
+/* ─── Lista de módulos ─── */
+.modulos-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.modulo-btn {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: left;
+  width: 100%;
+}
+
+.modulo-btn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.modulo-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.modulo-nombre {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+
+.modulo-duracion {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+/* ─── Cabecera del módulo ─── */
+.modulo-header {
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.modulo-glow {
+  position: absolute;
+  top: -2rem;
+  right: -4rem;
+  width: 400px;
+  height: 300px;
+  background: radial-gradient(ellipse, var(--glow-blue) 0%, transparent 70%);
+  opacity: 0.07;
+  pointer-events: none;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.modulo-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.modulo-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  background: rgba(96, 165, 250, 0.1);
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-family: 'Orbitron', monospace;
+  font-weight: 600;
+  color: var(--accent-blue);
+  letter-spacing: 0.05em;
+}
+
+.modulo-tiempo {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.modulo-titulo {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 0.75rem;
+}
+
+.modulo-desc {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 640px;
+}
+
+/* ─── Sección genérica ─── */
+.seccion {
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.seccion-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  color: var(--accent-blue);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  opacity: 0.9;
+}
+
+/* ─── Teoría ─── */
+.teoria-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 720px;
+}
+
+.teoria-parrafo {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.85;
+}
+
+/* ─── Bloque de código ─── */
+.codigo-block {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(96, 165, 250, 0.12);
+  max-width: 760px;
+}
+
+.codigo-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(96, 165, 250, 0.05);
+  border-bottom: 1px solid rgba(96, 165, 250, 0.08);
+}
+
+.codigo-dots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.codigo-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.codigo-dots span:nth-child(1) { background: #ff5f57; }
+.codigo-dots span:nth-child(2) { background: #febc2e; }
+.codigo-dots span:nth-child(3) { background: #28c840; }
+
+.codigo-titulo {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  flex: 1;
+  opacity: 0.8;
+}
+
+.codigo-lang {
+  font-size: 0.7rem;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  color: var(--accent-blue);
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.codigo-pre {
+  background: var(--bg-darker);
+  padding: 1.5rem 1.75rem;
+  overflow-x: auto;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #a5d8ff;
+  font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  white-space: pre;
+  margin: 0;
+  max-width: 100%;
+}
+
+.codigo-pre code {
+  font-family: inherit;
+  color: inherit;
+}
+
+/* ─── Ejercicio ─── */
+.ejercicio-card {
+  background: var(--bg-darker);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 760px;
+  transition: border-color 0.3s ease;
+}
+
+.ejercicio-card.abierto {
+  border-color: rgba(96, 165, 250, 0.15);
+}
+
+.ejercicio-reveal {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.ejercicio-reveal:hover {
+  color: var(--accent-blue);
+  background: rgba(96, 165, 250, 0.04);
+}
+
+.ejercicio-enunciado {
+  padding: 1.5rem 1.75rem 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.8;
+}
+
+.pista-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  margin: 1rem 1.75rem;
+  padding: 0.875rem 1rem;
+  background: rgba(96, 165, 250, 0.06);
+  border: 1px solid rgba(96, 165, 250, 0.12);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.pista-box svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.btn-solucion {
+  display: block;
+  margin: 0 1.75rem 1.5rem;
+  padding: 0.65rem 1.25rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  opacity: 0.7;
+}
+
+.btn-solucion:hover {
+  color: var(--accent-blue);
+  border-color: var(--accent-blue);
+  opacity: 1;
+}
+
+.solucion-block {
+  margin: 0 1.75rem 1.5rem;
+}
+
+.solucion-label {
+  font-size: 0.75rem;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  color: var(--accent-blue);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  opacity: 0.8;
+}
+
+.solucion-pre {
+  border-radius: 8px;
+  border: 1px solid rgba(96, 165, 250, 0.15) !important;
+}
+
+/* ─── Navegación inferior ─── */
+.modulo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 2rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  z-index: 1;
+}
+
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: none;
+}
+
+.btn-prev {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.btn-prev:hover {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  transform: translateX(-2px);
+}
+
+.btn-next {
+  background: var(--accent-blue);
+  color: var(--bg-dark);
+}
+
+.btn-next:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(96, 165, 250, 0.4);
+}
+
+/* ─── Bloques responsive ─── */
+[class$="-block"],
+[class$="-ejercicio"] {
   max-width: 100% !important;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* ─── Pre/code: scroll horizontal interno, no desborda ─── */
-
-.codigo-pre,
-.ts-pre,
-.react-pre,
-.ladder-pre,
-.tia-pre,
-.fundamento-snippet,
-.solucion-pre,
-.js-solucion-pre,
-.ts-solucion-pre,
-.react-solucion-pre,
-.ladder-solucion-pre,
-.tia-solucion-pre {
+[class$="-pre"],
+[class$="-solucion-pre"] {
   white-space: pre;
   overflow-x: auto;
   max-width: 100%;
   width: 100%;
   box-sizing: border-box;
-  /* Scroll suave en móvil */
   -webkit-overflow-scrolling: touch;
-  /* Evita que el texto rompa el layout */
   word-break: normal;
   overflow-wrap: normal;
 }
 
-/* ─── Teoría ─── */
+/* ========================================
+   ANIMACIONES
+   ======================================== */
 
-.teoria-body,
-.fundamento-text,
-.modulo-desc,
-.ejercicio-enunciado {
-  max-width: 100%;
-  word-break: break-word;
-  overflow-wrap: break-word;
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── Sidebar ─── */
-
-.python-sidebar,
-.js-sidebar,
-.ts-sidebar,
-.react-sidebar,
-.ladder-sidebar,
-.tia-sidebar {
-  min-width: 0;
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 /* ========================================
-   RESPONSIVE — tablet y móvil
+   RESPONSIVE
    ======================================== */
 
 @media (max-width: 900px) {
-
-  /* Todos los layouts pasan a una columna */
-  .python-layout,
-  .js-layout,
-  .ts-layout,
-  .react-layout,
-  .ladder-layout,
-  .tia-layout {
+  [class$="-layout"] {
     grid-template-columns: 1fr;
     padding: 0 1rem 3rem;
     gap: 1.5rem;
   }
 
-  /* Sidebars dejan de ser sticky */
-  .python-sidebar,
-  .js-sidebar,
-  .ts-sidebar,
-  .react-sidebar,
-  .ladder-sidebar,
-  .tia-sidebar {
+  [class$="-sidebar"] {
     position: static;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     padding-bottom: 1.5rem;
   }
 
-  /* Módulos en grid horizontal */
   .modulos-nav {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -149,58 +588,32 @@
 
   .modulo-duracion { display: none; }
 
-  .python-content,
-  .js-content,
-  .ts-content,
-  .react-content,
-  .ladder-content,
-  .tia-content {
-    padding-top: 1rem;
+  [class$="-content"] {
+    padding-top: 1.5rem;
   }
 
-  /* Reducir padding interno de snippets */
   .codigo-pre,
-  .ts-pre,
-  .react-pre,
-  .ladder-pre,
-  .tia-pre,
-  .fundamento-snippet {
+  [class$="-pre"] {
     font-size: 0.8rem;
     padding: 1rem 1.25rem;
     line-height: 1.7;
   }
 
-  /* Reducir padding de ejercicios */
   .ejercicio-enunciado { padding: 1.25rem 1.25rem 0; }
-  .pista-box,
-  .js-pista,
-  .ts-pista,
-  .react-pista,
-  .ladder-pista,
-  .tia-pista { margin: 0.75rem 1.25rem; }
+  .pista-box { margin: 0.75rem 1.25rem; }
   .btn-solucion { margin: 0 1.25rem 1.25rem; }
   .solucion-block { margin: 0 1.25rem 1.25rem; }
-
 }
 
 @media (max-width: 600px) {
-
-  /* Layouts con padding mínimo */
-  .python-layout,
-  .js-layout,
-  .ts-layout,
-  .react-layout,
-  .ladder-layout,
-  .tia-layout {
+  [class$="-layout"] {
     padding: 0 0.75rem 2rem;
   }
 
-  /* Módulos en columna única */
   .modulos-nav {
     grid-template-columns: 1fr !important;
   }
 
-  /* Navegación inferior en columna */
   .modulo-footer {
     flex-direction: column-reverse;
     align-items: stretch;
@@ -211,80 +624,33 @@
     width: 100%;
   }
 
-  /* Títulos más pequeños */
-  .modulo-titulo,
-  .js-titulo,
-  .ts-titulo,
-  .react-titulo,
-  .ladder-titulo,
-  .tia-titulo {
+  .modulo-titulo {
     font-size: clamp(1.4rem, 6vw, 2rem) !important;
   }
 
-  /* Snippets con fuente mínima legible */
   .codigo-pre,
-  .ts-pre,
-  .react-pre,
-  .ladder-pre,
-  .tia-pre,
-  .fundamento-snippet {
+  [class$="-pre"] {
     font-size: 0.75rem;
     padding: 0.875rem 1rem;
   }
 
-  /* Cabecera del bloque de código */
   .codigo-header {
     padding: 0.6rem 1rem;
   }
 
   .codigo-titulo {
     font-size: 0.75rem;
-    /* Truncar si es muy largo */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  /* Progreso wrapper */
   .progreso-wrapper {
     padding: 0.875rem 1rem;
   }
 
-  /* Módulo badge y tiempo */
   .modulo-meta {
     flex-wrap: wrap;
     gap: 0.5rem;
-  }
-}
-
-/* ========================================
-   FIX ESPECÍFICO: fundamentos timeline
-   en CodigoSection y LeaderSection
-   ======================================== */
-
-@media (max-width: 600px) {
-  .fundamento-item {
-    gap: 0.875rem;
-  }
-
-  .fundamento-left {
-    width: 32px;
-    flex-shrink: 0;
-  }
-
-  .fundamento-numero {
-    width: 32px;
-    height: 32px;
-    font-size: 0.6rem;
-  }
-
-  .fundamento-body {
-    padding-bottom: 2rem;
-    min-width: 0;
-  }
-
-  .fundamento-snippet {
-    font-size: 0.72rem;
-    padding: 0.875rem;
   }
 }

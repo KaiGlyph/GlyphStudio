@@ -1,9 +1,12 @@
-// src/App.tsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import Login          from './pages/Login';
+
+// Layout
 import Header from './components/layout/header';
 import Footer from './components/layout/footer';
+
+// Auth
+import Login from './pages/Login';
 
 // Páginas generales
 import Home     from './pages/home';
@@ -29,11 +32,15 @@ import ReactPage       from './pages/programacion/codigo/ReactPage';
 import LadderLogicPage from './pages/programacion/ladder/LadderLogicPage';
 import TiaPortalPage   from './pages/programacion/ladder/TiaPortalPage';
 
-// Ladder — próximamente (descomenta al crear cada archivo)
+// Ladder — próximamente
 import PlcsPage from './pages/programacion/ladder/Plcspage';
 
+// Estilos globales y de cursos
 import './styles/global.css';
 import './styles/course-shared.css';
+import './styles/courses/javascript.css';
+import './styles/courses/python.css';
+import './styles/courses/react.css';
 
 // Placeholder temporal para páginas aún no creadas
 function Proximamente() {
@@ -58,50 +65,50 @@ function Proximamente() {
 export default function App() {
   return (
     <AuthProvider>
-    <BrowserRouter>
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
-        <Header />
+      <BrowserRouter>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
+          <Header />
 
-        <main style={{ flex: 1 }}>
-          <Routes>
+          <main style={{ flex: 1 }}>
+            <Routes>
 
-            {/* ── Ruta principal ───────────────────────── */}
-            <Route path="/" element={<Home />} />
-            <Route path="/cursos"          element={<Cursos />} />
-            <Route path="/sobre-nosotros" element={<SobreNosotros />} />
-            <Route path="/contacto"       element={<Contacto />} />
-            <Route path="/terminos"       element={<Terminos />} />
-            <Route path="/privacidad"     element={<Privacidad />} />
+              {/* ── Ruta principal ───────────────────────── */}
+              <Route path="/" element={<Home />} />
+              <Route path="/cursos"          element={<Cursos />} />
+              <Route path="/sobre-nosotros" element={<SobreNosotros />} />
+              <Route path="/contacto"       element={<Contacto />} />
+              <Route path="/terminos"       element={<Terminos />} />
+              <Route path="/privacidad"     element={<Privacidad />} />
 
-            {/* ── Programación 2025 — vista general ───── */}
-            <Route path="/programacion-2025" element={<Programacion2025 />} />
+              {/* ── Programación 2025 — vista general ───── */}
+              <Route path="/programacion-2025" element={<Programacion2025 />} />
 
-            {/* ── Secciones de programación ─────────────── */}
-            <Route path="/programacion/codigo"  element={<CodigoSection />} />
-            <Route path="/programacion/ladder"  element={<LeaderSection />} />
+              {/* ── Secciones de programación ─────────────── */}
+              <Route path="/programacion/codigo"  element={<CodigoSection />} />
+              <Route path="/programacion/ladder"  element={<LeaderSection />} />
 
-            {/* ── Lenguajes de código ─────────────────── */}
-            <Route path="/programacion/codigo/python"      element={<PythonPage />} />
-            <Route path="/programacion/codigo/javascript"  element={<JavaScriptPage />} />
-            <Route path="/programacion/codigo/typescript"  element={<TypeScriptPage />} />
-            <Route path="/programacion/codigo/react"       element={<ReactPage />} />
+              {/* ── Lenguajes de código ─────────────────── */}
+              <Route path="/programacion/codigo/python"      element={<PythonPage />} />
+              <Route path="/programacion/codigo/javascript"  element={<JavaScriptPage />} />
+              <Route path="/programacion/codigo/typescript"  element={<TypeScriptPage />} />
+              <Route path="/programacion/codigo/react"       element={<ReactPage />} />
 
-            {/* ── Tecnologías Ladder ──────────────────── */}
-            <Route path="/programacion/ladder/ladder-logic" element={<LadderLogicPage />} />
-            <Route path="/programacion/ladder/tia-portal"   element={<TiaPortalPage />} />
-            <Route path="/programacion/ladder/plcs"         element={<PlcsPage />} />
+              {/* ── Tecnologías Ladder ──────────────────── */}
+              <Route path="/programacion/ladder/ladder-logic" element={<LadderLogicPage />} />
+              <Route path="/programacion/ladder/tia-portal"   element={<TiaPortalPage />} />
+              <Route path="/programacion/ladder/plcs"         element={<PlcsPage />} />
 
-            <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login />} />
 
-            {/* ── 404 — siempre al final ──────────────── */}
-            <Route path="*" element={<NotFound />} />
+              {/* ── 404 — siempre al final ──────────────── */}
+              <Route path="*" element={<NotFound />} />
 
-          </Routes>
-        </main>
+            </Routes>
+          </main>
 
-        <Footer />
-      </div>
-    </BrowserRouter>
+          <Footer />
+        </div>
+      </BrowserRouter>
     </AuthProvider>
   );
 }

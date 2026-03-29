@@ -1,0 +1,218 @@
+/* ========================================
+   PLCS INDUSTRIALES PAGE — ESTILOS
+   Acento: acero industrial (#5a6b7c / #7d8fa1)
+   ======================================== */
+
+/* ─── VARIABLES DE COLOR (CAMBIAR SOLO AQUÍ) ─── */
+.plcs-page {
+  --course-primary: #5a6b7c;              /* Gris acero oscuro */
+  --course-secondary: #7d8fa1;            /* Gris acero claro */
+  --course-code: #a8b5c2;                 /* Gris muy claro para código */
+  --course-text: #ffffff;                 /* Texto sobre fondo oscuro */
+  --course-glow: rgba(90, 107, 124, 0.15);
+  --course-border: rgba(90, 107, 124, 0.12);
+  --course-bg: rgba(90, 107, 124, 0.05);
+  --course-bg-light: rgba(90, 107, 124, 0.07);
+  --course-shadow: rgba(90, 107, 124, 0.35);
+}
+
+/* ─── Layout ─── */
+.plcs-page {
+  min-height: 100vh;
+  padding-top: 5rem;
+  background: linear-gradient(180deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+}
+
+.plcs-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 4.5rem);
+  padding: 0 1.5rem 4rem;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* ─── Sidebar ─── */
+.plcs-sidebar {
+  position: sticky;
+  top: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeInLeft 0.6s ease-out both;
+}
+
+/* Logo PLC */
+.plcs-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--course-primary), var(--course-secondary)) !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--course-text) !important;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px var(--course-shadow) !important;
+}
+
+/* ─── Barra de progreso ─── */
+.plcs-pct {
+  color: var(--course-primary) !important;
+}
+
+.plcs-fill {
+  background: linear-gradient(90deg, var(--course-primary), var(--course-secondary)) !important;
+}
+
+/* ─── Lista de módulos ─── */
+.modulo-btn.activo-plcs {
+  background: var(--course-bg-light);
+  border-color: var(--course-border);
+}
+
+.num-plcs {
+  background: var(--course-primary) !important;
+  color: var(--course-text) !important;
+  border-color: var(--course-primary) !important;
+}
+
+.num-plcs-done {
+  background: var(--course-bg) !important;
+  color: var(--course-primary) !important;
+  border-color: var(--course-primary) !important;
+}
+
+/* ─── Contenido principal ─── */
+.plcs-content {
+  padding: 2rem 0 0;
+  animation: fadeInUp 0.7s ease-out 0.1s both;
+  position: relative;
+}
+
+.plcs-glow {
+  position: absolute;
+  top: -2rem;
+  right: -4rem;
+  width: 400px;
+  height: 300px;
+  background: radial-gradient(ellipse, var(--course-glow) 0%, transparent 70%);
+  opacity: 0.1;
+  pointer-events: none;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.plcs-badge {
+  background: var(--course-bg) !important;
+  border: 1px solid var(--course-border) !important;
+  color: var(--course-primary) !important;
+}
+
+.plcs-titulo {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--course-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Código (texto en gris claro) ─── */
+.plcs-block .codigo-pre {
+  color: var(--course-code) !important;
+}
+
+/* ─── Secciones ─── */
+.plcs-label {
+  color: var(--course-primary) !important;
+}
+
+/* ─── Bloque de código ─── */
+.plcs-block {
+  border: 1px solid var(--course-border) !important;
+}
+
+.plcs-block .codigo-header {
+  background: var(--course-bg);
+}
+
+.plcs-lang {
+  color: var(--course-primary) !important;
+}
+
+/* ─── Ejercicio ─── */
+.plcs-ejercicio {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.plcs-ejercicio.abierto {
+  border-color: var(--course-border);
+}
+
+.plcs-pista {
+  background: var(--course-bg);
+  border: 1px solid var(--course-border);
+}
+
+.plcs-pista svg {
+  stroke: var(--course-primary);
+}
+
+.plcs-sol-label {
+  color: var(--course-primary) !important;
+}
+
+.plcs-solucion-pre {
+  border: 1px solid var(--course-border) !important;
+}
+
+/* ─── Botón siguiente ─── */
+.btn-next-plcs {
+  background: var(--course-primary) !important;
+  color: var(--course-text) !important;
+  font-weight: 700;
+}
+
+.btn-next-plcs:hover {
+  background: var(--course-secondary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--course-shadow) !important;
+}
+
+/* ─── Botón volver ─── */
+.plcs-sidebar .btn-back-sidebar:hover {
+  color: var(--course-primary) !important;
+}
+
+/* ─── Animaciones ─── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .plcs-layout {
+    grid-template-columns: 1fr;
+    padding: 0 1.25rem 3rem;
+  }
+
+  .plcs-sidebar {
+    position: static;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 1.5rem;
+  }
+
+  .plcs-content {
+    padding-top: 1.5rem;
+  }
+}
